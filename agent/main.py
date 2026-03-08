@@ -33,7 +33,7 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.prompt import Prompt
 
-from config import get_domains, build_system_prompt, list_skills, load_skill
+from config import get_domains, build_system_prompt, list_skills, load_skill, list_design_docs
 from tools import ALL_TOOLS
 
 console = Console()
@@ -125,6 +125,8 @@ def show_help():
         "[cyan]/switch <domain>[/cyan]   Switch persona (coding, devops, security)\n"
         "[cyan]/skills[/cyan]            List available skills for current persona\n"
         "[cyan]/skill <name>[/cyan]      Load and display a specific skill\n"
+        "[cyan]/design[/cyan]            List design docs loaded as context\n"
+        "[cyan]/context[/cyan]           Show all loaded context (persona, design, skills)\n"
         "[cyan]/help[/cyan]              Show this help\n"
         "[cyan]/quit[/cyan]              Exit",
         title="Commands",
@@ -157,8 +159,12 @@ def main():
     agent = create_agent(domain, args.provider, args.model)
 
     skills = list_skills(domain)
-    console.print(f"  Persona loaded. Skills available: [dim]{', '.join(skills)}[/dim]")
-    console.print(f"  Type [cyan]/help[/cyan] for commands.\n")
+    design = list_design_docs(domain)
+    console.print(f"  Persona loaded. Skills: [dim]{', '.join(skills)}[/dim]")
+    if design:
+        for cat, names in design.items():
+            console.print(f"  Design [{cat}]: [dim]{', '.join(names)}[/dim]")
+    console.print(f"  Type [cyan]/help[/cyan] for commands, [cyan]/context[/cyan] to see what's loaded.\n")
 
     # Chat loop
     while True:
@@ -205,9 +211,41 @@ def main():
                 console.print(f"\n  Switching to [bold cyan]{domain}[/bold cyan] persona...\n")
                 agent = create_agent(domain, args.provider, args.model)
                 skills = list_skills(domain)
-                console.print(f"  Persona loaded. Skills: [dim]{', '.join(skills)}[/dim]\n")
+                design = list_design_docs(domain)
+                console.print(f"  Persona loaded. Skills: [dim]{', '.join(skills)}[/dim]")
+                if design:
+                    for cat, names in design.items():
+                        console.print(f"  Design [{cat}]: [dim]{', '.join(names)}[/dim]")
+                console.print()
             else:
                 console.print(f"[red]Unknown domain.[/red] Choose from: coding, devops, security")
+            continue
+
+        elif cmd == "/design":
+            design = list_design_docs(domain)
+            if design:
+                console.print(f"Design docs loaded as context for [cyan]{domain}[/cyan]:")
+                for cat, names in design.items():
+                    console.print(f"  [bold]{cat}[/bold]:")
+                    for n in names:
+                        console.print(f"    • {n}")
+            else:
+                console.print(f"[dim]No design docs found for {domain}[/dim]")
+            continue
+
+        elif cmd == "/context":
+            console.print(f"\n[bold]Loaded context for [cyan]{domain}[/cyan]:[/bold]\n")
+            domains = get_domains()
+            console.print(f"  Persona: {domains[domain]['personas'][0]}")
+            console.print(f"  Team config: {domains[domain]['agents']}")
+            design = list_design_docs(domain)
+            if design:
+                console.print("  Design docs:")
+                for cat, names in design.items():
+                    console.print(f"    {cat}: {', '.join(names)}")
+            skills = list_skills(domain)
+            console.print(f"  Skills: {', '.join(skills)}")
+            console.print(f"\n  [dim]All of the above are included in the agent's system prompt.[/dim]\n")
             continue
 
         # Send to agent

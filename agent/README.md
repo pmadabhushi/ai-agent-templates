@@ -4,6 +4,41 @@ A working AI agent that impersonates DevOps, Coding, or Security personas using 
 
 Built with [Strands Agents SDK](https://github.com/strands-agents/sdk-python) (open-source).
 
+## What Gets Loaded
+
+When you select a persona, the agent builds its full context from your template files:
+
+| Context Layer | Source | How It's Used |
+|---------------|--------|---------------|
+| Persona | `personas/*.md` | Mindset, methodology, safety rules, output format |
+| Team Config | `AGENTS.md` | Build commands, branch strategy, environment info |
+| Design Docs | `design/**/*.md` | Architecture, APIs, patterns, threat models, policies, controls |
+| Skills | `skills/*/SKILL.md` | Step-by-step procedures for operational tasks |
+| Skill Triggers | Built-in keyword map | Auto-loads the right skill based on what you ask |
+
+All of this is injected into the system prompt at startup. The agent doesn't just know about your skills — it has the full instructions loaded and ready.
+
+### Design Context by Domain
+
+| Domain | Design Categories |
+|--------|-------------------|
+| coding | architecture, apis, patterns |
+| devops | services, features, workflows |
+| security | threat_models, policies, controls |
+
+### Skill Auto-Loading
+
+The agent detects task intent from your message and auto-loads the matching skill:
+
+| You say... | Agent loads... |
+|------------|---------------|
+| "deploy the service" | `deploy_service` skill |
+| "we have an incident" | `incident_triage` skill |
+| "check the logs" | `log_analysis` skill |
+| "rotate the API key" | `secrets_rotation` skill |
+| "review IAM permissions" | `access_review` skill |
+| "run the tests" | `run_tests` skill |
+
 ## Supported LLM Providers
 
 | Provider | Flag | Default Model | Auth |
@@ -54,37 +89,35 @@ python main.py --provider openai --model gpt-4o-mini
 | `/switch <domain>` | Switch persona (coding, devops, security) |
 | `/skills` | List available skills for current persona |
 | `/skill <name>` | Display a specific skill's instructions |
+| `/design` | List design docs loaded as context |
+| `/context` | Show everything loaded (persona, design, skills) |
 | `/help` | Show available commands |
 | `/quit` | Exit |
-
-## How It Works
-
-1. Reads `template.json` to discover all domains, personas, and skills
-2. Loads the selected persona's markdown as the agent's system prompt
-3. Loads the domain's `AGENTS.md` as team configuration context
-4. Gives the agent tools: shell execution, file reading, skill loading
-5. The agent follows the persona's mindset, methodology, safety rules, and output format
 
 ## Agent Tools
 
 | Tool | Description |
 |------|-------------|
-| `run_shell` | Execute shell commands (for gathering system info, running builds, etc.) |
-| `read_file` | Read files (configs, logs, source code, design docs) |
+| `run_shell` | Execute shell commands (system info, builds, log queries) |
+| `read_file` | Read files (configs, logs, source code) |
 | `list_directory` | List directory contents |
-| `get_skill` | Load a skill's step-by-step instructions |
+| `get_skill` | Reload a skill's step-by-step instructions |
+| `search_design_docs` | Search across all design docs for a term |
+| `get_design_doc` | Load a specific design doc by category and name |
+| `list_all_context` | Show all available context for a domain |
 | `switch_persona_info` | Get info about other available personas |
 
 ## Architecture
 
 ```
 agent/
-├── main.py          # CLI entry point and chat loop
-├── config.py        # Loads template.json, builds system prompts
-├── tools.py         # Agent tools (shell, file, skill loading)
+├── main.py          # CLI entry point, persona picker, chat loop
+├── config.py        # Loads template.json, builds system prompts with full context
+├── tools.py         # Agent tools (shell, file, skill, design doc search)
 ├── requirements.txt # Python dependencies
 └── README.md        # This file
 ```
 
-The agent dynamically reads from the parent `ai-agent-templates/` directory,
-so any changes to personas, skills, or AGENTS.md files are picked up immediately.
+The agent dynamically reads from the parent `ai-agent-templates/` directory.
+Any changes to personas, skills, design docs, or AGENTS.md files are picked up
+on next startup or persona switch.
