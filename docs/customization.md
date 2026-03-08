@@ -349,97 +349,30 @@ servers that expose capabilities through a standard interface.
 
 ### Exposing Agent Context as an MCP Server
 
-You can make your team's knowledge available to any MCP-compatible tool (Kiro,
-Cursor, VS Code, etc.) by wrapping the agent's config layer as an MCP server:
+The repo ships a working MCP server at `agent/mcp_server.py` that makes your
+team's knowledge available to any MCP-compatible tool (Kiro, Cursor, VS Code,
+Claude Desktop). It wraps the same config layer used by the CLI agent, so any
+changes to your templates are immediately available via MCP.
 
-```python
-# agent/mcp_server.py — Expose agent context via MCP
-from mcp.server.fastmcp import FastMCP
-
-from config import (
-    load_agents_md, load_persona, load_skill, load_all_skills,
-    list_skills, load_design_docs, list_design_docs, get_domains,
-)
-
-mcp = FastMCP("agent-context-kit")
-
-
-@mcp.tool()
-def get_team_config(domain: str) -> str:
-    """Get the AGENTS.md configuration for a domain.
-
-    Args:
-        domain: The domain (coding, devops, security).
-    """
-    return load_agents_md(domain)
-
-
-@mcp.tool()
-def get_persona(domain: str) -> str:
-    """Get the persona definition for a domain.
-
-    Args:
-        domain: The domain (coding, devops, security).
-    """
-    return load_persona(domain)
-
-
-@mcp.tool()
-def get_skill_instructions(domain: str, skill_name: str) -> str:
-    """Get step-by-step instructions for a specific skill.
-
-    Args:
-        domain: The domain (coding, devops, security).
-        skill_name: The skill to load (e.g., deploy_service, incident_triage).
-    """
-    content = load_skill(domain, skill_name)
-    if content:
-        return content
-    available = list_skills(domain)
-    return f"Skill '{skill_name}' not found. Available: {', '.join(available)}"
-
-
-@mcp.tool()
-def search_architecture(domain: str, query: str) -> str:
-    """Search design documents for architecture information.
-
-    Args:
-        domain: The domain to search.
-        query: Text to search for (case-insensitive).
-    """
-    design_docs = load_design_docs(domain)
-    results = []
-    for category, docs in design_docs.items():
-        for doc in docs:
-            if query.lower() in doc["content"].lower():
-                # Return first 500 chars of matching doc
-                preview = doc["content"][:500]
-                results.append(f"[{category}] {doc['name']}:\n{preview}")
-    return "\n\n---\n\n".join(results) if results else f"No matches for '{query}'"
-
-
-@mcp.tool()
-def list_available_context(domain: str) -> str:
-    """List all available context for a domain: skills, design docs, persona.
-
-    Args:
-        domain: The domain (coding, devops, security).
-    """
-    skills = list_skills(domain)
-    design = list_design_docs(domain)
-    design_summary = ", ".join(
-        f"{cat}: {', '.join(names)}" for cat, names in design.items()
-    )
-    return (
-        f"Domain: {domain}\n"
-        f"Skills: {', '.join(skills)}\n"
-        f"Design docs: {design_summary}"
-    )
-
-
-if __name__ == "__main__":
-    mcp.run()
+```bash
+cd agent
+pip install -r requirements.txt
+python mcp_server.py
 ```
+
+The server exposes 9 tools:
+
+| Tool | What It Does |
+|------|-------------|
+| `list_domains` | Discover available domains, skills, and design doc categories |
+| `get_team_config` | Get AGENTS.md for a domain |
+| `get_persona` | Get persona definition |
+| `get_skill` | Get a specific skill's step-by-step instructions |
+| `get_all_skills` | Get all skills for a domain in one call |
+| `match_skill` | Find the best skill for a user message using keyword triggers |
+| `get_design_doc` | Load a specific design document |
+| `search_design_docs` | Search across all design docs |
+| `get_full_context` | Get the complete assembled system prompt for a domain |
 
 ### Configuring the MCP Server
 
@@ -450,16 +383,15 @@ For Kiro, add to `.kiro/settings/mcp.json`:
   "mcpServers": {
     "agent-context-kit": {
       "command": "python",
-      "args": ["agent/mcp_server.py"],
-      "env": {},
+      "args": ["path/to/agent/mcp_server.py"],
       "disabled": false,
-      "autoApprove": ["list_available_context", "get_team_config"]
+      "autoApprove": ["list_domains", "list_skills", "list_design_docs"]
     }
   }
 }
 ```
 
-For Cursor, add to `.cursor/mcp.json` with the same structure.
+For Cursor, add to `.cursor/mcp.json` with the same format.
 
 Now any MCP-compatible tool can query your team's knowledge:
 
@@ -467,9 +399,23 @@ Now any MCP-compatible tool can query your team's knowledge:
 User: What's the deployment process for our service?
 
 Tool calls: get_team_config("devops") → returns AGENTS.md
-            get_skill_instructions("devops", "deploy_service") → returns skill steps
+            get_skill("devops", "deploy_service") → returns skill steps
 
 Agent: Based on your team config, here's the deployment process...
+```
+
+### Extending the MCP Server
+
+Add your own tools by editing `agent/mcp_server.py`:
+
+```python
+@mcp.tool()
+def query_database(query: str, database: str = "prod") -> str:
+    """Run a read-only SQL query against the specified database."""
+    if not query.strip().upper().startswith("SELECT"):
+        return "Error: Only SELECT queries are allowed"
+    # Your database connection logic here
+    return execute_query(database, query)
 ```
 
 ### When to Use MCP vs the Full Agent

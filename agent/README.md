@@ -114,6 +114,7 @@ agent/
 ├── main.py            # CLI entry point, persona picker, chat loop
 ├── config.py          # Loads template.json, builds system prompts with full context
 ├── tools.py           # Agent tools (shell, file, skill, design doc search)
+├── mcp_server.py      # MCP server — expose context to any MCP-compatible tool
 ├── eval_harness.py    # Evaluation harness — measure agent effectiveness
 ├── validate_config.py # Tutorial validator — check your config works
 ├── eval/
@@ -121,6 +122,52 @@ agent/
 ├── requirements.txt   # Python dependencies
 └── README.md          # This file
 ```
+
+## MCP Server
+
+The MCP server exposes your team's knowledge to any MCP-compatible AI tool
+(Kiro, Cursor, VS Code, Claude Desktop) without running the full agent.
+It's read-only and lightweight — no LLM needed.
+
+```bash
+# Run directly (stdio transport)
+python mcp_server.py
+```
+
+### Configure in Kiro
+
+Add to `.kiro/settings/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "agent-context-kit": {
+      "command": "python",
+      "args": ["/path/to/agent/mcp_server.py"],
+      "disabled": false,
+      "autoApprove": ["list_domains", "list_skills", "list_design_docs"]
+    }
+  }
+}
+```
+
+### Configure in Cursor
+
+Add to `.cursor/mcp.json` with the same format.
+
+### Available MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `list_domains` | Discover available domains, skills, and design doc categories |
+| `get_team_config` | Get AGENTS.md for a domain (build commands, conventions, safety rules) |
+| `get_persona` | Get persona definition (mindset, methodology, output format) |
+| `get_skill` | Get step-by-step instructions for a specific skill |
+| `get_all_skills` | Get all skills for a domain in one call |
+| `match_skill` | Find the best skill for a user's message using keyword triggers |
+| `get_design_doc` | Load a specific design document by category and name |
+| `search_design_docs` | Search across all design docs for a term |
+| `get_full_context` | Get the complete assembled system prompt for a domain |
 
 ## Evaluating Your Config
 

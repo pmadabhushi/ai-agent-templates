@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-03-08
+
+### Added
+- MCP server (`agent/mcp_server.py`) — exposes team knowledge (personas, skills,
+  design docs) to any MCP-compatible AI tool (Kiro, Cursor, VS Code, Claude Desktop).
+  9 tools including list_domains, get_skill, match_skill, search_design_docs,
+  get_full_context. Read-only, lightweight, no LLM needed.
+- Added `fastmcp>=2.0.0` to agent dependencies
+
+### Changed
+- Updated README Compatible Tools table with MCP server row
+- Updated `docs/customization.md` MCP section to reference real server implementation
+- Updated `agent/README.md` with MCP Server section and configuration examples
+
 ## [1.2.0] - 2026-03-08
 
 ### Added

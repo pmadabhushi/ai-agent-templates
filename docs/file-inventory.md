@@ -66,6 +66,7 @@ Complete list of every template file in the repo.
 | `agent/main.py` | CLI entry point, persona picker, chat loop |
 | `agent/config.py` | Loads template.json, builds system prompts |
 | `agent/tools.py` | Agent tools (shell, file, skill, design doc search) |
+| `agent/mcp_server.py` | MCP server — expose context to any MCP-compatible tool |
 | `agent/eval_harness.py` | Evaluation harness — measure agent effectiveness |
 | `agent/validate_config.py` | Tutorial validator — check your config works |
 | `agent/eval/scenarios.json` | Test scenarios (10 scenarios, 3 safety tests) |

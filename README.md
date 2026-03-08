@@ -94,6 +94,7 @@ Supports AWS Bedrock, OpenAI, Anthropic, and LiteLLM. See [agent/README.md](agen
 | GitHub Copilot | Reference with `#file:AGENTS.md` | [Setup](docs/tool-guides/copilot.md) |
 | Amazon Q Developer | Include in repo context | [Setup](docs/tool-guides/amazon-q.md) |
 | Claude / ChatGPT | Paste contents or upload files | — |
+| MCP-compatible tools | Connect via MCP server | [Setup](agent/README.md#mcp-server) |
 | Custom agents | Use the `agent/` directory | [Setup](agent/README.md) |
 
 ## Documentation
