@@ -38,21 +38,24 @@ agent-context-kit/
 
 ## Choose Your Path
 
-### I'm new to AI agents
+### 🟢 Beginner — I'm new to AI agents
 1. Read [Getting Started](docs/getting-started.md) to understand the concepts
 2. Look at the [Quickstart Example](examples/quickstart/) — 4 files, 5 minutes
-3. Copy a template and fill in your team's info
+3. Read the [Cheat Sheet](docs/cheatsheet.md) for a one-page reference
+4. Copy a template and fill in your team's info
 
-### I want to use this with my team
-1. Pick a domain: [`templates/coding/`](templates/coding/), [`templates/devops/`](templates/devops/), or [`templates/security/`](templates/security/)
-2. Copy the folder into your repo
-3. Replace all `[placeholder]` values with your actual tools, commands, and conventions
-4. Point your AI tool at `AGENTS.md` — see [Tool Setup Guides](docs/tool-guides/)
+### 🟡 Intermediate — I want to use this with my team
+1. See a realistic config: [`examples/devops-filled/`](examples/devops-filled/) (OrderService)
+2. Pick a domain: [`templates/coding/`](templates/coding/), [`templates/devops/`](templates/devops/), or [`templates/security/`](templates/security/)
+3. Copy the folder into your repo and replace all `[placeholder]` values
+4. Wire up your AI tool — see [Tool Setup Guides](docs/tool-guides/) for Kiro, Cursor, Copilot, Amazon Q
 
-### I want to go deep
-1. Read [Advanced Patterns](docs/advanced-patterns.md) — multi-agent orchestration, context management
-2. Read [Evaluation Guide](docs/evaluation.md) — measure and improve agent effectiveness
-3. Read [Customization Guide](docs/customization.md) — new domains, MCP integration, CI/CD
+### 🔴 Expert — I want to go deep
+1. Study the full multi-persona example: [`examples/greenfield-energy/`](examples/greenfield-energy/)
+2. Run the working agent: [`agent/`](agent/) — Python CLI with Strands SDK, multi-provider support
+3. Read [Advanced Patterns](docs/advanced-patterns.md) — multi-agent orchestration, context management
+4. Read [Evaluation Guide](docs/evaluation.md) — measure and improve agent effectiveness
+5. Read [Customization Guide](docs/customization.md) — new domains, custom tools, MCP, CI/CD
 
 ## How Each Piece Works
 
@@ -63,7 +66,12 @@ agent-context-kit/
 | `skills/*.md` | Step-by-step runbooks loaded on demand for specific tasks |
 | `design/**/*.md` | Architecture, API specs, patterns, threat models, policies |
 
-## Try the Agent
+## Try the Agent (Expert)
+
+The `agent/` directory contains a working multi-persona agent built with the
+[Strands Agents SDK](https://github.com/strands-agents/sdk-python). It loads
+all templates as context and supports multiple LLM providers. This is for
+developers who want to build or extend agent applications programmatically.
 
 ```bash
 cd agent
@@ -88,16 +96,16 @@ Supports AWS Bedrock, OpenAI, Anthropic, and LiteLLM. See [agent/README.md](agen
 
 ## Documentation
 
-| Guide | Audience | Description |
-|-------|----------|-------------|
-| [Getting Started](docs/getting-started.md) | Beginner | What are agents, why this matters, how to start |
-| [Cheat Sheet](docs/cheatsheet.md) | Beginner | One-page reference card with copy-paste templates |
-| [Tool Setup Guides](docs/tool-guides/) | All | Kiro, Cursor, Copilot, Amazon Q configuration |
-| [Advanced Patterns](docs/advanced-patterns.md) | Expert | Multi-agent orchestration, context management, prompt engineering |
-| [Evaluation Guide](docs/evaluation.md) | Expert | Metrics, eval harness, measuring agent effectiveness |
-| [Customization Guide](docs/customization.md) | Expert | New domains, custom tools, MCP, CI/CD integration |
+| Guide | Level | Description |
+|-------|-------|-------------|
+| [Getting Started](docs/getting-started.md) | 🟢 Beginner | What are agents, why this matters, how to start |
+| [Cheat Sheet](docs/cheatsheet.md) | 🟢 Beginner | One-page reference card with copy-paste templates |
+| [Tool Setup Guides](docs/tool-guides/) | 🟡 Intermediate | Kiro, Cursor, Copilot, Amazon Q configuration |
+| [Advanced Patterns](docs/advanced-patterns.md) | 🔴 Expert | Multi-agent orchestration, context management, prompt engineering |
+| [Evaluation Guide](docs/evaluation.md) | 🔴 Expert | Metrics, eval harness, measuring agent effectiveness |
+| [Customization Guide](docs/customization.md) | 🔴 Expert | New domains, custom tools, MCP, CI/CD integration |
 | [Master Template Reference](docs/master-template.md) | Reference | Full reference with all sections explained |
-| [Contributing](docs/CONTRIBUTING.md) | Contributors | How to add domains, skills, personas |
+| [Contributing](docs/CONTRIBUTING.md) | Reference | How to add domains, skills, personas |
 | [File Inventory](docs/file-inventory.md) | Reference | Complete list of every file in the repo |
 
 ## License

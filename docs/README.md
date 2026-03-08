@@ -2,34 +2,38 @@
 
 Guides are organized by experience level. Start at the top and go as deep as you need.
 
-## Getting Started (Beginner)
+## 🟢 Beginner
 
-| Guide | Description |
-|-------|-------------|
+| Resource | Description |
+|----------|-------------|
 | [Getting Started](getting-started.md) | What are AI agents? Why does configuration matter? How to use this repo. |
 | [Cheat Sheet](cheatsheet.md) | One-page reference card. Copy-paste templates, placeholder conventions, common mistakes. |
+| [Quickstart Example](../examples/quickstart/) | Simplest possible config — 4 files for a Todo App. |
 
-## Tool Setup (All Levels)
+## 🟡 Intermediate
 
-| Guide | Description |
-|-------|-------------|
-| [Kiro](tool-guides/kiro.md) | Auto-reads AGENTS.md. Use steering files for personas. |
-| [Cursor](tool-guides/cursor.md) | Wire up via `.cursorrules` or `@file` references. |
-| [GitHub Copilot](tool-guides/copilot.md) | Use `#file:` references and custom instructions. |
-| [Amazon Q Developer](tool-guides/amazon-q.md) | Workspace context and `/dev` agent integration. |
+| Resource | Description |
+|----------|-------------|
+| [Tool Setup: Kiro](tool-guides/kiro.md) | Auto-reads AGENTS.md. Use steering files for personas. |
+| [Tool Setup: Cursor](tool-guides/cursor.md) | Wire up via `.cursorrules` or `@file` references. |
+| [Tool Setup: GitHub Copilot](tool-guides/copilot.md) | Use `#file:` references and custom instructions. |
+| [Tool Setup: Amazon Q](tool-guides/amazon-q.md) | Workspace context and `/dev` agent integration. |
+| [DevOps Filled Example](../examples/devops-filled/) | Realistic single-team config for a web service. |
 
-## Going Deeper (Expert)
+## 🔴 Expert
 
-| Guide | Description |
-|-------|-------------|
+| Resource | Description |
+|----------|-------------|
 | [Advanced Patterns](advanced-patterns.md) | Multi-agent orchestration, context window management, dynamic skill loading, prompt engineering, versioning. |
 | [Evaluation](evaluation.md) | Measure agent effectiveness. Before/after framework, metrics, eval harness code. |
 | [Customization](customization.md) | New domains, composite skills, custom tools, MCP integration, CI/CD pipelines. |
+| [Greenfield Energy Example](../examples/greenfield-energy/) | Full three-persona config for an IoT energy platform. |
+| [Working Agent](../agent/) | Python CLI agent with Strands SDK, multi-provider support. |
 
 ## Reference
 
-| Guide | Description |
-|-------|-------------|
-| [Master Template Reference](master-template.md) | Full reference doc with every section explained in detail. Historical document from the original design. |
+| Resource | Description |
+|----------|-------------|
+| [Master Template Reference](master-template.md) | Full reference doc with every section explained in detail. |
 | [Contributing](CONTRIBUTING.md) | How to add new domains, skills, personas, and design templates. |
 | [File Inventory](file-inventory.md) | Complete list of every file in the repo. |
