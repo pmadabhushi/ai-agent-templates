@@ -6,7 +6,9 @@ Run this after completing the tutorial to verify your config works.
 
 Two modes:
   1. Structural validation (no LLM needed) — checks files exist and are well-formed
+     Works on Python 3.9+ (no heavy dependencies).
   2. LLM validation (needs a provider) — sends the 3 tutorial tests to a real LLM
+     Requires Python 3.10+ and strands-agents installed.
 
 Usage:
   # Structural checks only (no API key needed)

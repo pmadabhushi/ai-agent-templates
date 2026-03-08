@@ -213,37 +213,74 @@ sudo apt install git
 sudo apt install git
 ```
 
-### 3. Python
+### 3. Python 3.10+
 
-The agent, eval harness, MCP server, and tutorial validator all require Python 3.9+.
+The agent, MCP server, and eval harness require Python 3.10 or newer (the
+`strands-agents` and `fastmcp` packages don't support 3.9). The tutorial
+validator's structural checks work on 3.9+, but for the full experience you
+want 3.10+.
+
+macOS ships with Python 3.9, so you'll need to install a newer version.
 
 ```bash
-# Check your version
+# Check your current version
 python3 --version
-
-# macOS (via Homebrew)
-brew install python
-
-# Linux (Debian/Ubuntu)
-sudo apt install python3 python3-pip python3-venv
-
-# Windows (WSL2)
-sudo apt install python3 python3-pip python3-venv
+# If it says 3.10 or higher, you're good — skip to step 4.
 ```
 
-We recommend using a virtual environment to keep dependencies isolated:
+#### macOS
+
+You need [Homebrew](https://brew.sh) first (the macOS package manager). If you
+don't have it:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate    # macOS/Linux
-# .venv\Scripts\activate     # Windows (PowerShell)
+# Install Homebrew (one-time setup)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+Then install Python:
+
+```bash
+brew install python
+# This installs the latest Python (3.12+) and adds python3 to your PATH.
+
+# Verify
+python3 --version
+```
+
+#### Linux (Debian/Ubuntu)
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+Most modern distros ship with 3.10+. If yours doesn't, use
+[pyenv](https://github.com/pyenv/pyenv) or the
+[deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa).
+
+#### Windows
+
+Use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) (recommended)
+and follow the Linux instructions above. Or install Python from
+[python.org](https://www.python.org/downloads/) (3.10+).
 
 ### 4. Clone the Repo and Install Dependencies
 
 ```bash
 git clone https://github.com/pmadabhushi/agent-context-kit.git
-cd agent-context-kit/agent
+cd agent-context-kit
+
+# Create a virtual environment (keeps dependencies isolated)
+python3 -m venv .venv
+source .venv/bin/activate    # macOS/Linux
+# .venv\Scripts\activate     # Windows (PowerShell)
+
+# Upgrade pip (avoids dependency resolution issues)
+pip install --upgrade pip
+
+# Install dependencies
+cd agent
 pip install -r requirements.txt
 ```
 
@@ -251,6 +288,9 @@ This installs:
 - `strands-agents` — the agent SDK (for running the full agent)
 - `fastmcp` — the MCP server framework
 - `rich` — terminal formatting
+
+If you see errors about Python version, make sure you created the venv with
+Python 3.10+ (run `python3 --version` inside the venv to check).
 
 ### 5. LLM Access (Pick One)
 
@@ -326,12 +366,11 @@ See [LiteLLM docs](https://docs.litellm.ai/docs/providers) for provider-specific
 
 ### 6. Verify Everything Works
 
-Quick smoke test to confirm your setup:
+Quick smoke test to confirm your setup. After step 4 you should already be in
+the `agent-context-kit/agent` directory with the venv activated.
 
 ```bash
-cd agent-context-kit/agent
-
-# 1. Structural validation (no LLM needed)
+# 1. Structural validation (no LLM needed, works even on Python 3.9)
 python validate_config.py --path ../examples/quickstart
 # Should show: ALL 17 CHECKS PASSED
 
@@ -354,11 +393,11 @@ access is configured. You're ready to go.
 |----------|--------|------------|---------|
 | Use templates in your repo | No | No | Yes (any) |
 | Follow the 1-hour tutorial | No | No | Yes (any) |
-| Run the tutorial validator (structural) | Yes | No | No |
-| Run the tutorial validator (full) | Yes | Yes | No |
-| Run the full agent | Yes | Yes | No |
-| Run the eval harness | Yes | Yes | No |
-| Use the MCP server | Yes | No | Yes (MCP-compatible) |
+| Run the tutorial validator (structural) | 3.9+ | No | No |
+| Run the tutorial validator (full) | 3.10+ | Yes | No |
+| Run the full agent | 3.10+ | Yes | No |
+| Run the eval harness | 3.10+ | Yes | No |
+| Use the MCP server | 3.10+ | No | Yes (MCP-compatible) |
 
 ## Next Steps
 

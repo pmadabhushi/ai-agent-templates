@@ -50,6 +50,10 @@ The agent detects task intent from your message and auto-loads the matching skil
 
 ## Setup
 
+Requires Python 3.10+ (the `strands-agents` and `fastmcp` packages don't
+support 3.9). See [Environment Setup](../docs/getting-started.md#setting-up-your-environment)
+for full instructions including Homebrew, Python, and LLM provider configuration.
+
 ```bash
 cd agent
 pip install -r requirements.txt
