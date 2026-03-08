@@ -63,6 +63,16 @@
 |---|---|---|
 | Dev Agent | `personas/dev_agent.md` | Default persona for all coding tasks |
 
+## Design Documentation
+
+Before making changes, review the relevant design docs:
+
+| Category | Location | Contents |
+|---|---|---|
+| Architecture | `design/architecture/` | Component structure, data models, dependencies, design decisions |
+| APIs | `design/apis/` | Endpoint specs, contracts, rate limits, versioning |
+| Patterns | `design/patterns/` | Approved design patterns, implementation templates, error handling |
+
 ## References
 
 - Design doc index: [Link]

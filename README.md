@@ -35,6 +35,9 @@ Each domain contains:
 | `coding/skills/run_tests/SKILL.md` | Coding | Skill |
 | `coding/skills/generate_changelog/SKILL.md` | Coding | Skill |
 | `coding/personas/dev_agent.md` | Coding | Persona |
+| `coding/design/architecture/ARCHITECTURE_TEMPLATE.md` | Coding | Design doc |
+| `coding/design/apis/API_TEMPLATE.md` | Coding | Design doc |
+| `coding/design/patterns/PATTERN_TEMPLATE.md` | Coding | Design doc |
 | `devops/README.md` | DevOps | Human-facing doc |
 | `devops/AGENTS.md` | DevOps | AI config |
 | `devops/skills/deploy_service/SKILL.md` | DevOps | Skill |
@@ -55,6 +58,9 @@ Each domain contains:
 | `security/skills/secrets_rotation/SKILL.md` | Security | Skill |
 | `security/skills/access_review/SKILL.md` | Security | Skill |
 | `security/personas/security_analyst.md` | Security | Persona |
+| `security/design/threat_models/THREAT_MODEL_TEMPLATE.md` | Security | Design doc |
+| `security/design/policies/POLICY_TEMPLATE.md` | Security | Design doc |
+| `security/design/controls/CONTROL_TEMPLATE.md` | Security | Design doc |
 
 ## Template Manifest
 

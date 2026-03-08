@@ -8,6 +8,11 @@
       "description": "AI coding agent — code reviews, testing, changelog generation",
       "agents": "coding/AGENTS.md",
       "personas": ["coding/personas/dev_agent.md"],
+      "design": {
+        "architecture": "coding/design/architecture/",
+        "apis": "coding/design/apis/",
+        "patterns": "coding/design/patterns/"
+      },
       "skills": [
         "coding/skills/raise_cr/SKILL.md",
         "coding/skills/run_tests/SKILL.md",
@@ -37,6 +42,11 @@
       "description": "AI security agent — vulnerability triage, incident response, secrets rotation, access review",
       "agents": "security/AGENTS.md",
       "personas": ["security/personas/security_analyst.md"],
+      "design": {
+        "threat_models": "security/design/threat_models/",
+        "policies": "security/design/policies/",
+        "controls": "security/design/controls/"
+      },
       "skills": [
         "security/skills/vuln_triage/SKILL.md",
         "security/skills/incident_response/SKILL.md",

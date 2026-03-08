@@ -69,6 +69,16 @@
 |---|---|---|
 | Security Analyst | `personas/security_analyst.md` | Default persona for all security tasks |
 
+## Design Documentation
+
+Before investigating any security finding, review the relevant design docs:
+
+| Category | Location | Contents |
+|---|---|---|
+| Threat models | `design/threat_models/` | STRIDE analysis, trust boundaries, assets, open risks |
+| Security policies | `design/policies/` | Requirements, enforcement, exceptions, compliance mapping |
+| Security controls | `design/controls/` | Control architecture, configuration, monitoring, failure modes |
+
 ## References
 
 - Threat model: [Link]
