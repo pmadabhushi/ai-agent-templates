@@ -79,3 +79,23 @@ Complete list of every template file in the repo.
 | `README.md` | Repo landing page |
 | `LICENSE` | MIT License |
 | `CHANGELOG.md` | Version history |
+
+## Documentation
+
+| File | Description |
+|---|---|
+| `docs/getting-started.md` | Concepts and overview for beginners |
+| `docs/tutorial.md` | 1-hour hands-on tutorial: build your first agent config |
+| `docs/cheatsheet.md` | One-page reference card |
+| `docs/adoption-guide.md` | Team rollout guide |
+| `docs/advanced-patterns.md` | Multi-agent, context management, prompt engineering |
+| `docs/evaluation.md` | Metrics and eval harness |
+| `docs/customization.md` | New domains, MCP, CI/CD |
+| `docs/master-template.md` | Full reference with all sections explained |
+| `docs/CONTRIBUTING.md` | How to contribute |
+| `docs/file-inventory.md` | This file |
+| `docs/README.md` | Documentation index |
+| `docs/tool-guides/kiro.md` | Kiro setup guide |
+| `docs/tool-guides/cursor.md` | Cursor setup guide |
+| `docs/tool-guides/copilot.md` | GitHub Copilot setup guide |
+| `docs/tool-guides/amazon-q.md` | Amazon Q Developer setup guide |

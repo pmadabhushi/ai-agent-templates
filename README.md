@@ -40,9 +40,10 @@ agent-context-kit/
 
 ### 🟢 Beginner — I'm new to AI agents
 1. Read [Getting Started](docs/getting-started.md) to understand the concepts
-2. Look at the [Quickstart Example](examples/quickstart/) — 4 files, 5 minutes
-3. Read the [Cheat Sheet](docs/cheatsheet.md) for a one-page reference
-4. Copy a template and fill in your team's info
+2. Follow the [1-Hour Tutorial](docs/tutorial.md) — build your first config from scratch
+3. Look at the [Quickstart Example](examples/quickstart/) — 4 files, 5 minutes
+4. Read the [Cheat Sheet](docs/cheatsheet.md) for a one-page reference
+5. Copy a template and fill in your team's info
 
 ### 🟡 Intermediate — I want to use this with my team
 1. Read the [Adoption Guide](docs/adoption-guide.md) — workshop agenda, progressive rollout, getting buy-in
@@ -100,6 +101,7 @@ Supports AWS Bedrock, OpenAI, Anthropic, and LiteLLM. See [agent/README.md](agen
 | Guide | Level | Description |
 |-------|-------|-------------|
 | [Getting Started](docs/getting-started.md) | 🟢 Beginner | What are agents, why this matters, how to start |
+| [1-Hour Tutorial](docs/tutorial.md) | 🟢 Beginner | Hands-on: build your first agent config from scratch |
 | [Cheat Sheet](docs/cheatsheet.md) | 🟢 Beginner | One-page reference card with copy-paste templates |
 | [Adoption Guide](docs/adoption-guide.md) | 🟡 Intermediate | Rolling out to your team: workshop, progressive rollout, objections |
 | [Tool Setup Guides](docs/tool-guides/) | 🟡 Intermediate | Kiro, Cursor, Copilot, Amazon Q configuration with worked examples |

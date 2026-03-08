@@ -179,6 +179,7 @@ Adapt the structure to fit your workflow.
 
 ## Next Steps
 
+- Follow the [1-Hour Tutorial](tutorial.md) — build your first config hands-on
 - Start with the quickstart: `examples/quickstart/` (4 files, 5 minutes)
 - Browse the templates in `templates/coding/`, `templates/devops/`, or `templates/security/`
 - Read the simple example in `examples/devops-filled/`
