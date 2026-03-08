@@ -49,7 +49,7 @@ as the onboarding doc you'd give a new team member on day one.
 
 Create `AGENTS.md` in the root of your project. Start with this skeleton:
 
-```markdown
+````markdown
 # AGENTS.md — [Your Project Name]
 
 > This file is read by AI agents at session start.
@@ -102,7 +102,7 @@ Create `AGENTS.md` in the root of your project. Start with this skeleton:
 | Skill | File | When to Use |
 |-------|------|-------------|
 | Deploy | `skills/deploy.md` | When deploying to any environment |
-```
+````
 
 ### Step 2: Fill it in
 
@@ -132,7 +132,7 @@ like a knowledgeable team member.
 
 Create `persona.md` in your project root:
 
-```markdown
+````markdown
 # PERSONA: [Your Role Name]
 
 ## Identity
@@ -166,7 +166,7 @@ Files:    [Files changed]
 Tests:    [Pass/Fail/Added]
 Next:     [Suggested next step]
 ```
-```
+````
 
 ### Step 2: Customize the mindset
 
@@ -205,7 +205,7 @@ sometimes you get a wall of text, sometimes a one-liner.
 Pick a format that matches how your team communicates. The template above is
 simple. Here's a more detailed one for operational work:
 
-```markdown
+````markdown
 ## Output Format
 
 ### For investigations:
@@ -224,7 +224,7 @@ Files:    [List of files modified]
 Tests:    [New/updated tests]
 Risk:     [Low/Medium/High — what could go wrong]
 ```
-```
+````
 
 ---
 
@@ -250,7 +250,7 @@ Pick one. We'll build a skill for it.
 Create `skills/` directory and a file for your skill. Let's use deployment as
 the example — adapt it to whatever task you picked.
 
-```markdown
+````markdown
 # SKILL: Deploy to Staging
 
 **Trigger:** When asked to deploy, release, or push to staging
@@ -311,7 +311,7 @@ Status:      [Success/Failed]
 Health:      [Healthy/Degraded]
 Rollback:    [rollback command if needed]
 ```
-```
+````
 
 ### Step 3: Make it real
 
