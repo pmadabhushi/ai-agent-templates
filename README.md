@@ -1,4 +1,4 @@
-# AI Agent Templates
+# Agent Context Kit
 
 Give your AI assistant the context it needs to actually help — your architecture,
 your runbooks, your safety rules — so it stops asking and starts doing.
@@ -32,7 +32,7 @@ The agent reads these at session start. No more re-explaining context.
 Ready-to-use templates for three domains, a working agent, and a filled example:
 
 ```
-ai-agent-templates/
+agent-context-kit/
 ├── templates/        # ← Copy these into your repo
 │   ├── coding/       # Dev agent: code reviews, testing, changelogs
 │   ├── devops/       # Ops agent: deployments, incidents, scaling, logs

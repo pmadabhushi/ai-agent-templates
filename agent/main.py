@@ -3,7 +3,7 @@
 Multi-Persona AI Agent
 ======================
 A working agent that can impersonate DevOps, Coding, or Security personas
-using the ai-agent-templates knowledge base.
+using the agent-context-kit knowledge base.
 
 Supports:
   - AWS Bedrock (default)
@@ -147,7 +147,7 @@ def main():
 
     console.print(Panel(
         "[bold]Multi-Persona AI Agent[/bold]\n"
-        "Powered by your ai-agent-templates knowledge base",
+        "Powered by your agent-context-kit knowledge base",
         border_style="green"
     ))
 

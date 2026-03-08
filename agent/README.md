@@ -1,6 +1,6 @@
 # Multi-Persona AI Agent
 
-A working AI agent that impersonates DevOps, Coding, or Security personas using the `ai-agent-templates` knowledge base.
+A working AI agent that impersonates DevOps, Coding, or Security personas using the `agent-context-kit` knowledge base.
 
 Built with [Strands Agents SDK](https://github.com/strands-agents/sdk-python) (open-source).
 
@@ -118,6 +118,6 @@ agent/
 └── README.md        # This file
 ```
 
-The agent dynamically reads from the parent `ai-agent-templates/` directory.
+The agent dynamically reads from the parent `agent-context-kit/` directory.
 Any changes to personas, skills, design docs, or AGENTS.md files are picked up
 on next startup or persona switch.

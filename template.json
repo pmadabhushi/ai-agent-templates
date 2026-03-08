@@ -1,5 +1,5 @@
 {
-  "name": "ai-agent-templates",
+  "name": "agent-context-kit",
   "version": "1.0.0",
   "description": "Structured configuration templates for AI coding, DevOps, and security agents. Encode team knowledge into AGENTS.md, skills, and personas so AI agents read context automatically at session start.",
   "build-system": "no-op",
