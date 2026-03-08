@@ -12,7 +12,7 @@
 ## Build Conventions
 
 - Always build packages in this order: `[package-1]` → `[package-2]` → `[package-3]`
-- Use `[build tool and command]` to build (e.g., `brazil-build` or `mvn clean install`)
+- Use `[build tool and command]` to build (e.g., `make build` or `mvn clean install`)
 - Run unit tests before raising any CR: `[test command]`
 - Do NOT build packages unless explicitly instructed to do so before raising a CR
 

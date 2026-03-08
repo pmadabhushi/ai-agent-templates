@@ -87,7 +87,7 @@ This file is read automatically by AI coding agents at session start. Do not dup
 ### Build Conventions
 
 - Always build packages in this order: `[package-1]` → `[package-2]` → `[package-3]`  
-- Use `[build tool and command]` to build (e.g., `brazil-build` or `mvn clean install`)  
+- Use `[build tool and command]` to build (e.g., `make build` or `mvn clean install`)  
 - Run unit tests before raising any CR: `[test command]`  
 - Do NOT build packages unless explicitly instructed to do so before raising a CR
 
@@ -350,7 +350,7 @@ This file is read automatically by AI DevOps agents at session start. Do not dup
 - **Service:** \[ServiceName\]  
 - **Infrastructure:** \[Brief description, e.g., ECS on AWS, Kubernetes on GKE\]  
 - **Environments:** `dev` → `staging` → `prod`  
-- **Pipeline tool:** \[Tool name, e.g., Brazil, Jenkins, GitHub Actions, Spinnaker\]  
+- **Pipeline tool:** \[Tool name, e.g., Jenkins, GitHub Actions, GitLab CI, Spinnaker\]  
 - **Infrastructure design doc:** \[Link\]
 
 ### Deployment Conventions
@@ -2130,7 +2130,7 @@ Here are the three `README.md` templates — one for each domain — to complete
 ### Prerequisites
 
 - \[Prerequisite 1, e.g., Java 17+, Python 3.11+\]  
-- \[Prerequisite 2, e.g., Brazil CLI, Maven, npm\]  
+- \[Prerequisite 2, e.g., Maven, Gradle, npm\]  
 - \[Prerequisite 3, e.g., AWS credentials configured\]
 
 ### Setup
@@ -2143,11 +2143,11 @@ cd \[repo name\]
 
 \# Install dependencies
 
-\[install command, e.g., brazil ws sync \--md\]
+\[install command, e.g., npm install or pip install -r requirements.txt\]
 
 \# Build the project
 
-\[build command, e.g., brazil-build\]
+\[build command, e.g., mvn clean install or make build\]
 
 ### Running Tests
 

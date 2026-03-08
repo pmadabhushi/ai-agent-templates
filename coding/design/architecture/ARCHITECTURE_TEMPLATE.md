@@ -9,8 +9,8 @@ This document describes the architecture, code structure, and design decisions f
 - **Team:** [TeamName]
 - **Repo:** [repo link]
 - **Primary language:** [e.g., Java 21, TypeScript, Python 3.11]
-- **Framework:** [e.g., Spring Boot, Express, Coral, FastAPI]
-- **Build system:** [e.g., Gradle, Maven, npm, Brazil]
+- **Framework:** [e.g., Spring Boot, Express, FastAPI, Gin]
+- **Build system:** [e.g., Gradle, Maven, npm]
 - **Pipeline:** [pipeline link]
 
 ## High-Level Architecture Diagram
@@ -224,7 +224,7 @@ graph TB
 
 ### Application Layer
 - **Language:** [e.g., Java 21]
-- **Framework:** [e.g., Spring Boot 3.2, Coral]
+- **Framework:** [e.g., Spring Boot 3.2, Express]
 - **DI:** [e.g., Spring, Dagger 2, Guice]
 - **Build:** [e.g., Gradle 8.x, Maven 3.9]
 - **Serialization:** [e.g., Jackson, Gson, protobuf]

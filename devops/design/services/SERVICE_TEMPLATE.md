@@ -11,7 +11,7 @@ This document describes the architecture, infrastructure, and operational charac
 - **Repo:** [repo link]
 - **Pipeline:** [pipeline link]
 - **Primary language:** [e.g., Java 21, Python 3.11, Go 1.22]
-- **Framework:** [e.g., Spring Boot, Express, Coral, FastAPI]
+- **Framework:** [e.g., Spring Boot, Express, FastAPI, Gin]
 
 ## High-Level Architecture Diagram
 
@@ -157,7 +157,7 @@ graph TB
 
 ### Application Layer
 - **Language:** [e.g., Java 21]
-- **Framework:** [e.g., Spring Boot, Coral]
+- **Framework:** [e.g., Spring Boot, Express]
 - **Build system:** [e.g., Gradle, Maven, npm]
 - **DI:** [e.g., Spring, Dagger 2, Guice]
 - **Serialization:** [e.g., Jackson, Gson, protobuf]

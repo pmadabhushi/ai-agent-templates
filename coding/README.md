@@ -25,7 +25,7 @@
 ### Prerequisites
 
 - [Prerequisite 1, e.g., Java 17+, Python 3.11+]
-- [Prerequisite 2, e.g., Brazil CLI, Maven, npm]
+- [Prerequisite 2, e.g., Maven, Gradle, npm]
 - [Prerequisite 3, e.g., AWS credentials configured]
 
 ### Setup

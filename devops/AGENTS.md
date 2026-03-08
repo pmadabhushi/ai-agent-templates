@@ -7,7 +7,7 @@
 - **Service:** [ServiceName]
 - **Infrastructure:** [Brief description, e.g., ECS on AWS, Kubernetes on GKE]
 - **Environments:** `dev` → `staging` → `prod`
-- **Pipeline tool:** [Tool name, e.g., Brazil, Jenkins, GitHub Actions, Spinnaker]
+- **Pipeline tool:** [Tool name, e.g., Jenkins, GitHub Actions, GitLab CI, Spinnaker]
 - **Infrastructure design doc:** [Link]
 
 ## Deployment Conventions
