@@ -177,6 +177,189 @@ The file names and folder structure are conventions, not requirements. The impor
 thing is the content pattern: team config → persona → skills → design docs.
 Adapt the structure to fit your workflow.
 
+## Setting Up Your Environment
+
+This section walks you through everything you need to use the templates, run the
+tutorial validator, or run the full agent. Skip what you already have.
+
+### 1. Shell / Terminal
+
+You need a terminal with a standard shell:
+
+| OS | What to use |
+|----|-------------|
+| macOS | Terminal.app or iTerm2 (zsh is the default shell) |
+| Linux | Any terminal (bash or zsh) |
+| Windows | Git Bash, WSL2 (recommended), or PowerShell |
+
+If you're on Windows, WSL2 gives you the smoothest experience — the agent and
+scripts assume a Unix-like shell.
+
+### 2. Git
+
+You need Git to clone the repo and (optionally) version-control your own configs.
+
+```bash
+# Check if you have it
+git --version
+
+# macOS (if not installed, Xcode Command Line Tools will prompt)
+xcode-select --install
+
+# Linux (Debian/Ubuntu)
+sudo apt install git
+
+# Windows (WSL2)
+sudo apt install git
+```
+
+### 3. Python
+
+The agent, eval harness, MCP server, and tutorial validator all require Python 3.9+.
+
+```bash
+# Check your version
+python3 --version
+
+# macOS (via Homebrew)
+brew install python
+
+# Linux (Debian/Ubuntu)
+sudo apt install python3 python3-pip python3-venv
+
+# Windows (WSL2)
+sudo apt install python3 python3-pip python3-venv
+```
+
+We recommend using a virtual environment to keep dependencies isolated:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate    # macOS/Linux
+# .venv\Scripts\activate     # Windows (PowerShell)
+```
+
+### 4. Clone the Repo and Install Dependencies
+
+```bash
+git clone https://github.com/pmadabhushi/agent-context-kit.git
+cd agent-context-kit/agent
+pip install -r requirements.txt
+```
+
+This installs:
+- `strands-agents` — the agent SDK (for running the full agent)
+- `fastmcp` — the MCP server framework
+- `rich` — terminal formatting
+
+### 5. LLM Access (Pick One)
+
+The agent and eval harness need access to an LLM. You only need one provider.
+
+#### Option A: AWS Bedrock (default)
+
+No API key needed — uses your AWS credentials. You need an AWS account with
+Bedrock model access enabled for Claude.
+
+```bash
+# Install the AWS CLI if you don't have it
+# macOS
+brew install awscli
+
+# Linux
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip && sudo ./aws/install
+
+# Configure credentials
+aws configure
+# Enter: AWS Access Key ID, Secret Access Key, Region (e.g., us-east-1)
+
+# Verify access
+aws bedrock list-foundation-models --query "modelSummaries[?contains(modelId, 'claude')]" --output table
+```
+
+If you see Claude models listed, you're good. If you get a permissions error,
+you need to [enable model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)
+in the Bedrock console.
+
+```bash
+# Run the agent with Bedrock (default)
+python main.py --persona devops
+```
+
+#### Option B: OpenAI
+
+```bash
+# Get an API key from https://platform.openai.com/api-keys
+export OPENAI_API_KEY="sk-..."
+
+# Run the agent with OpenAI
+python main.py --persona devops --provider openai
+```
+
+#### Option C: Anthropic
+
+```bash
+# Get an API key from https://console.anthropic.com/
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Run the agent with Anthropic
+python main.py --persona devops --provider anthropic
+```
+
+#### Option D: LiteLLM (any provider)
+
+LiteLLM supports 100+ providers (Azure, Google, Ollama, local models, etc.).
+
+```bash
+pip install litellm
+
+# Set the env vars for your provider (example: Azure OpenAI)
+export AZURE_API_KEY="..."
+export AZURE_API_BASE="https://your-resource.openai.azure.com/"
+
+# Run the agent
+python main.py --persona devops --provider litellm --model azure/gpt-4o
+```
+
+See [LiteLLM docs](https://docs.litellm.ai/docs/providers) for provider-specific setup.
+
+### 6. Verify Everything Works
+
+Quick smoke test to confirm your setup:
+
+```bash
+cd agent-context-kit/agent
+
+# 1. Structural validation (no LLM needed)
+python validate_config.py --path ../examples/quickstart
+# Should show: ALL 17 CHECKS PASSED
+
+# 2. Run the agent (needs LLM access from step 5)
+python main.py --persona devops
+# Type: "What skills do you have?"
+# Type: /quit
+
+# 3. (Optional) Run the MCP server
+python mcp_server.py
+# Should start without errors (Ctrl+C to stop)
+```
+
+If step 1 passes, your Python environment is good. If step 2 works, your LLM
+access is configured. You're ready to go.
+
+### What You Need for Each Activity
+
+| Activity | Python | LLM Access | AI Tool |
+|----------|--------|------------|---------|
+| Use templates in your repo | No | No | Yes (any) |
+| Follow the 1-hour tutorial | No | No | Yes (any) |
+| Run the tutorial validator (structural) | Yes | No | No |
+| Run the tutorial validator (full) | Yes | Yes | No |
+| Run the full agent | Yes | Yes | No |
+| Run the eval harness | Yes | Yes | No |
+| Use the MCP server | Yes | No | Yes (MCP-compatible) |
+
 ## Next Steps
 
 - Follow the [1-Hour Tutorial](tutorial.md) — build your first config hands-on

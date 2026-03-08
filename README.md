@@ -40,10 +40,11 @@ agent-context-kit/
 
 ### 🟢 Beginner — I'm new to AI agents
 1. Read [Getting Started](docs/getting-started.md) to understand the concepts
-2. Follow the [1-Hour Tutorial](docs/tutorial.md) — build your first config from scratch
-3. Look at the [Quickstart Example](examples/quickstart/) — 4 files, 5 minutes
-4. Read the [Cheat Sheet](docs/cheatsheet.md) for a one-page reference
-5. Copy a template and fill in your team's info
+2. Set up your [environment](docs/getting-started.md#setting-up-your-environment) (Python, LLM access, etc.)
+3. Follow the [1-Hour Tutorial](docs/tutorial.md) — build your first config from scratch
+4. Look at the [Quickstart Example](examples/quickstart/) — 4 files, 5 minutes
+5. Read the [Cheat Sheet](docs/cheatsheet.md) for a one-page reference
+6. Copy a template and fill in your team's info
 
 ### 🟡 Intermediate — I want to use this with my team
 1. Read the [Adoption Guide](docs/adoption-guide.md) — workshop agenda, progressive rollout, getting buy-in

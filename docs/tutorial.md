@@ -6,6 +6,8 @@ rules, and execute tasks the way you want.
 
 **Prerequisites:** A code project you work on (any language). An AI tool installed
 (Kiro, Cursor, Copilot, Amazon Q, or even ChatGPT). That's it.
+If you want to run the agent, eval harness, or tutorial validator, you'll also
+need Python 3.9+ and LLM access — see [Environment Setup](getting-started.md#setting-up-your-environment).
 
 **What you'll build:**
 - An `AGENTS.md` that gives your AI assistant project context

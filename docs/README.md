@@ -6,7 +6,7 @@ Guides are organized by experience level. Start at the top and go as deep as you
 
 | Resource | Description |
 |----------|-------------|
-| [Getting Started](getting-started.md) | What are AI agents? Why does configuration matter? How to use this repo. |
+| [Getting Started](getting-started.md) | What are AI agents? Why does configuration matter? How to use this repo. Includes [environment setup](getting-started.md#setting-up-your-environment). |
 | [1-Hour Tutorial](tutorial.md) | Hands-on: build your first agent config from scratch, step by step. |
 | [Cheat Sheet](cheatsheet.md) | One-page reference card. Copy-paste templates, placeholder conventions, common mistakes. |
 | [Quickstart Example](../examples/quickstart/) | Simplest possible config — 4 files for a Todo App. |
