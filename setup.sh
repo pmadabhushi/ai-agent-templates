@@ -18,7 +18,8 @@
 #   4. Creates a virtual environment
 #   5. Installs Python dependencies
 #   6. Runs the structural validator as a smoke test
-#   7. Checks for LLM provider credentials (optional)
+#   7. Checks for an AI-powered IDE (Kiro, VS Code, Cursor)
+#   8. Checks for LLM provider credentials (optional)
 
 set -euo pipefail
 
@@ -488,9 +489,112 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 7. LLM Provider Check (informational only)
+# 7. AI-Powered IDE (optional)
 # ---------------------------------------------------------------------------
-header "7. LLM Provider (optional — needed for running the agent)"
+header "7. AI-Powered IDE (optional — for using templates with an AI assistant)"
+
+IDE_FOUND=false
+
+# Check for Kiro
+if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Kiro.app" ]]; then
+    pass "Kiro installed"
+    IDE_FOUND=true
+elif command -v kiro &>/dev/null; then
+    pass "Kiro installed"
+    IDE_FOUND=true
+fi
+
+# Check for Cursor
+if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Cursor.app" ]]; then
+    pass "Cursor installed"
+    IDE_FOUND=true
+elif command -v cursor &>/dev/null; then
+    pass "Cursor installed"
+    IDE_FOUND=true
+fi
+
+# Check for VS Code
+if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Visual Studio Code.app" ]]; then
+    pass "VS Code installed"
+    IDE_FOUND=true
+elif command -v code &>/dev/null; then
+    pass "VS Code installed"
+    IDE_FOUND=true
+fi
+
+if ! $IDE_FOUND; then
+    info "No AI-powered IDE detected. The templates work with any of these (all free or have free tiers):"
+    echo ""
+    echo "    Kiro (free preview)     — https://kiro.dev"
+    echo "      Reads AGENTS.md automatically. Best built-in support for agent configs."
+    echo "      macOS: Download .dmg from the website. Sign in with a free AWS Builder ID."
+    echo ""
+    echo "    VS Code + Copilot       — https://code.visualstudio.com"
+    echo "      Free. GitHub Copilot Free tier includes chat and code completions."
+    if [[ "$OS" == "macos" ]]; then
+        echo "      macOS: brew install --cask visual-studio-code"
+    elif [[ "$OS" == "linux" ]]; then
+        echo "      Linux: https://code.visualstudio.com/docs/setup/linux"
+    fi
+    echo ""
+    echo "    Cursor (free tier)      — https://cursor.com"
+    echo "      Free tier includes AI chat. Reads .cursorrules for context."
+    if [[ "$OS" == "macos" ]]; then
+        echo "      macOS: Download .dmg from the website"
+    fi
+    echo ""
+    echo "    You can also use the templates with ChatGPT, Claude, or Amazon Q Developer"
+    echo "    by pasting file contents or uploading them."
+    echo ""
+
+    if ! $CHECK_ONLY; then
+        read -rp "  Install an IDE now? [kiro/vscode/cursor/skip] (default: skip): " IDE_CHOICE
+        IDE_CHOICE="${IDE_CHOICE:-skip}"
+
+        case "$IDE_CHOICE" in
+            kiro)
+                if [[ "$OS" == "macos" ]]; then
+                    info "Opening Kiro download page..."
+                    open "https://kiro.dev/downloads" 2>/dev/null || echo "    Visit: https://kiro.dev/downloads"
+                    echo "    After installing, open Kiro and sign in with your AWS Builder ID (free)."
+                else
+                    echo "    Visit: https://kiro.dev/downloads"
+                fi
+                ;;
+            vscode)
+                if [[ "$OS" == "macos" ]] && command -v brew &>/dev/null; then
+                    info "Installing VS Code via Homebrew..."
+                    brew install --cask visual-studio-code
+                    if [[ -d "/Applications/Visual Studio Code.app" ]]; then
+                        pass "VS Code installed"
+                        info "Install GitHub Copilot extension: code --install-extension GitHub.copilot"
+                    fi
+                elif [[ "$OS" == "linux" ]]; then
+                    info "Opening VS Code download page..."
+                    echo "    Visit: https://code.visualstudio.com/docs/setup/linux"
+                else
+                    echo "    Visit: https://code.visualstudio.com"
+                fi
+                ;;
+            cursor)
+                info "Opening Cursor download page..."
+                if [[ "$OS" == "macos" ]]; then
+                    open "https://cursor.com" 2>/dev/null || echo "    Visit: https://cursor.com"
+                else
+                    echo "    Visit: https://cursor.com"
+                fi
+                ;;
+            skip|"")
+                info "Skipped — you can install one later"
+                ;;
+        esac
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# 8. LLM Provider Check (informational only)
+# ---------------------------------------------------------------------------
+header "8. LLM Provider (optional — needed for running the agent)"
 
 LLM_FOUND=false
 
