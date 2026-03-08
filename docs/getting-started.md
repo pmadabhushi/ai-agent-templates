@@ -202,8 +202,12 @@ You need Git to clone the repo and (optionally) version-control your own configs
 ```bash
 # Check if you have it
 git --version
+```
 
-# macOS (if not installed, Xcode Command Line Tools will prompt)
+#### Install Git
+
+```bash
+# macOS — if Git isn't installed, this will prompt you to install Xcode Command Line Tools
 xcode-select --install
 
 # Linux (Debian/Ubuntu)
@@ -212,6 +216,35 @@ sudo apt install git
 # Windows (WSL2)
 sudo apt install git
 ```
+
+#### Configure Git (first time only)
+
+Git needs your name and email before you can commit. These show up in your
+commit history — they don't need to match a GitHub account.
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+#### (Optional) Connect to GitHub
+
+If you want to push your own agent configs to a GitHub repo, you need
+authentication. The easiest way on macOS:
+
+```bash
+# Install the GitHub CLI
+brew install gh
+
+# Authenticate (opens a browser)
+gh auth login
+```
+
+Alternatively, set up an [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+or a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+You don't need GitHub access to use the templates or run the agent — only if
+you want to push your own configs.
 
 ### 3. Python 3.10+
 
