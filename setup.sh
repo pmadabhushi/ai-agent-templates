@@ -10,6 +10,7 @@
 # Usage:
 #   ./setup.sh              # Full setup
 #   ./setup.sh --check      # Just check what's installed, don't install anything
+#   ./setup.sh --ide        # Jump straight to IDE install/update
 #
 # What it does:
 #   1. Checks OS and shell
@@ -39,9 +40,11 @@ info()  { echo -e "  ${BLUE}→${NC} $1"; }
 header() { echo -e "\n${BLUE}$1${NC}"; }
 
 CHECK_ONLY=false
-if [[ "${1:-}" == "--check" ]]; then
-    CHECK_ONLY=true
-fi
+IDE_ONLY=false
+case "${1:-}" in
+    --check) CHECK_ONLY=true ;;
+    --ide)   IDE_ONLY=true ;;
+esac
 
 ERRORS=0
 WARNINGS=0
@@ -123,6 +126,142 @@ detect_pkg_manager() {
     elif command -v pacman &>/dev/null; then PKG_MGR="pacman"
     fi
 }
+
+# ---------------------------------------------------------------------------
+# IDE setup function (defined early so --ide flag can use it)
+# ---------------------------------------------------------------------------
+ide_setup() {
+    header "7. AI-Powered IDE (for using templates with an AI assistant)"
+
+    HAS_KIRO=false
+    HAS_CURSOR=false
+    HAS_VSCODE=false
+
+    # Detect installed IDEs
+    if { [[ "$OS" == "macos" ]] && [[ -d "/Applications/Kiro.app" ]]; } || command -v kiro &>/dev/null; then
+        HAS_KIRO=true
+        KIRO_VER=""
+        if [[ "$OS" == "macos" && -f "/Applications/Kiro.app/Contents/Resources/app/package.json" ]]; then
+            KIRO_VER=$( sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "/Applications/Kiro.app/Contents/Resources/app/package.json" 2>/dev/null | head -1 )
+        fi
+        pass "Kiro installed${KIRO_VER:+ (v$KIRO_VER)}"
+    fi
+
+    if { [[ "$OS" == "macos" ]] && [[ -d "/Applications/Cursor.app" ]]; } || command -v cursor &>/dev/null; then
+        HAS_CURSOR=true
+        pass "Cursor installed"
+    fi
+
+    if { [[ "$OS" == "macos" ]] && [[ -d "/Applications/Visual Studio Code.app" ]]; } || command -v code &>/dev/null; then
+        HAS_VSCODE=true
+        VSCODE_VER=$(code --version 2>/dev/null | head -1 || echo "")
+        pass "VS Code installed${VSCODE_VER:+ (v$VSCODE_VER)}"
+    fi
+
+    if ! $HAS_KIRO && ! $HAS_CURSOR && ! $HAS_VSCODE; then
+        info "No AI-powered IDE detected"
+    fi
+
+    echo ""
+    echo "  Available IDEs (all free or have free tiers):"
+    echo ""
+    echo "    [1] Kiro (free preview)     — https://kiro.dev"
+    echo "        Reads AGENTS.md automatically. Best built-in support for agent configs."
+    echo "        Sign in with a free AWS Builder ID."
+    echo ""
+    echo "    [2] VS Code + Copilot       — https://code.visualstudio.com"
+    echo "        Free. GitHub Copilot Free tier includes chat and code completions."
+    echo ""
+    echo "    [3] Cursor (free tier)      — https://cursor.com"
+    echo "        Free tier includes AI chat. Reads .cursorrules for context."
+    echo ""
+    echo "    You can also use the templates with ChatGPT, Claude, or Amazon Q Developer"
+    echo "    by pasting file contents or uploading them."
+    echo ""
+
+    if $CHECK_ONLY; then
+        return
+    fi
+
+    read -rp "  Install or update an IDE? [1=kiro/2=vscode/3=cursor/skip] (default: skip): " IDE_CHOICE
+    IDE_CHOICE="${IDE_CHOICE:-skip}"
+
+    case "$IDE_CHOICE" in
+        1|kiro)
+            if [[ "$OS" == "macos" ]]; then
+                if $HAS_KIRO; then
+                    info "Opening Kiro download page to get the latest version..."
+                else
+                    info "Opening Kiro download page..."
+                fi
+                open "https://kiro.dev/downloads" 2>/dev/null || echo "    Visit: https://kiro.dev/downloads"
+                echo "    Download the .dmg, drag to Applications, and sign in with your AWS Builder ID (free)."
+                if $HAS_KIRO; then
+                    echo "    Replace the existing Kiro.app to update."
+                fi
+            else
+                echo "    Visit: https://kiro.dev/downloads"
+            fi
+            ;;
+        2|vscode)
+            if [[ "$OS" == "macos" ]] && command -v brew &>/dev/null; then
+                if $HAS_VSCODE; then
+                    info "Updating VS Code via Homebrew..."
+                    brew upgrade --cask visual-studio-code 2>/dev/null || pass "VS Code is already up to date"
+                else
+                    info "Installing VS Code via Homebrew..."
+                    brew install --cask visual-studio-code
+                fi
+                if [[ -d "/Applications/Visual Studio Code.app" ]] || command -v code &>/dev/null; then
+                    pass "VS Code ready"
+                    if ! code --list-extensions 2>/dev/null | grep -qi "github.copilot"; then
+                        info "Installing GitHub Copilot extension..."
+                        code --install-extension GitHub.copilot 2>/dev/null || echo "    Install manually: search 'GitHub Copilot' in VS Code extensions"
+                    else
+                        pass "GitHub Copilot extension already installed"
+                    fi
+                fi
+            elif [[ "$OS" == "linux" ]]; then
+                echo "    Visit: https://code.visualstudio.com/docs/setup/linux"
+            else
+                echo "    Visit: https://code.visualstudio.com"
+            fi
+            ;;
+        3|cursor)
+            if [[ "$OS" == "macos" ]]; then
+                if $HAS_CURSOR; then
+                    info "Opening Cursor download page to get the latest version..."
+                else
+                    info "Opening Cursor download page..."
+                fi
+                open "https://cursor.com" 2>/dev/null || echo "    Visit: https://cursor.com"
+                echo "    Download the .dmg and drag to Applications."
+                if $HAS_CURSOR; then
+                    echo "    Replace the existing Cursor.app to update."
+                fi
+            else
+                echo "    Visit: https://cursor.com"
+            fi
+            ;;
+        skip|"")
+            info "Skipped — run ./setup.sh --ide anytime to install or update"
+            ;;
+    esac
+}
+
+# ---------------------------------------------------------------------------
+# Handle --ide flag: jump straight to IDE setup and exit
+# ---------------------------------------------------------------------------
+if $IDE_ONLY; then
+    OS="unknown"
+    case "$(uname -s)" in
+        Darwin*)  OS="macos";;
+        Linux*)   OS="linux";;
+        MINGW*|MSYS*|CYGWIN*) OS="windows";;
+    esac
+    ide_setup
+    exit 0
+fi
 
 # ---------------------------------------------------------------------------
 # 1. OS Detection
@@ -488,108 +627,8 @@ else
     ERRORS=$((ERRORS + 1))
 fi
 
-# ---------------------------------------------------------------------------
-# 7. AI-Powered IDE (optional)
-# ---------------------------------------------------------------------------
-header "7. AI-Powered IDE (optional — for using templates with an AI assistant)"
-
-IDE_FOUND=false
-
-# Check for Kiro
-if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Kiro.app" ]]; then
-    pass "Kiro installed"
-    IDE_FOUND=true
-elif command -v kiro &>/dev/null; then
-    pass "Kiro installed"
-    IDE_FOUND=true
-fi
-
-# Check for Cursor
-if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Cursor.app" ]]; then
-    pass "Cursor installed"
-    IDE_FOUND=true
-elif command -v cursor &>/dev/null; then
-    pass "Cursor installed"
-    IDE_FOUND=true
-fi
-
-# Check for VS Code
-if [[ "$OS" == "macos" ]] && [[ -d "/Applications/Visual Studio Code.app" ]]; then
-    pass "VS Code installed"
-    IDE_FOUND=true
-elif command -v code &>/dev/null; then
-    pass "VS Code installed"
-    IDE_FOUND=true
-fi
-
-if ! $IDE_FOUND; then
-    info "No AI-powered IDE detected. The templates work with any of these (all free or have free tiers):"
-    echo ""
-    echo "    Kiro (free preview)     — https://kiro.dev"
-    echo "      Reads AGENTS.md automatically. Best built-in support for agent configs."
-    echo "      macOS: Download .dmg from the website. Sign in with a free AWS Builder ID."
-    echo ""
-    echo "    VS Code + Copilot       — https://code.visualstudio.com"
-    echo "      Free. GitHub Copilot Free tier includes chat and code completions."
-    if [[ "$OS" == "macos" ]]; then
-        echo "      macOS: brew install --cask visual-studio-code"
-    elif [[ "$OS" == "linux" ]]; then
-        echo "      Linux: https://code.visualstudio.com/docs/setup/linux"
-    fi
-    echo ""
-    echo "    Cursor (free tier)      — https://cursor.com"
-    echo "      Free tier includes AI chat. Reads .cursorrules for context."
-    if [[ "$OS" == "macos" ]]; then
-        echo "      macOS: Download .dmg from the website"
-    fi
-    echo ""
-    echo "    You can also use the templates with ChatGPT, Claude, or Amazon Q Developer"
-    echo "    by pasting file contents or uploading them."
-    echo ""
-
-    if ! $CHECK_ONLY; then
-        read -rp "  Install an IDE now? [kiro/vscode/cursor/skip] (default: skip): " IDE_CHOICE
-        IDE_CHOICE="${IDE_CHOICE:-skip}"
-
-        case "$IDE_CHOICE" in
-            kiro)
-                if [[ "$OS" == "macos" ]]; then
-                    info "Opening Kiro download page..."
-                    open "https://kiro.dev/downloads" 2>/dev/null || echo "    Visit: https://kiro.dev/downloads"
-                    echo "    After installing, open Kiro and sign in with your AWS Builder ID (free)."
-                else
-                    echo "    Visit: https://kiro.dev/downloads"
-                fi
-                ;;
-            vscode)
-                if [[ "$OS" == "macos" ]] && command -v brew &>/dev/null; then
-                    info "Installing VS Code via Homebrew..."
-                    brew install --cask visual-studio-code
-                    if [[ -d "/Applications/Visual Studio Code.app" ]]; then
-                        pass "VS Code installed"
-                        info "Install GitHub Copilot extension: code --install-extension GitHub.copilot"
-                    fi
-                elif [[ "$OS" == "linux" ]]; then
-                    info "Opening VS Code download page..."
-                    echo "    Visit: https://code.visualstudio.com/docs/setup/linux"
-                else
-                    echo "    Visit: https://code.visualstudio.com"
-                fi
-                ;;
-            cursor)
-                info "Opening Cursor download page..."
-                if [[ "$OS" == "macos" ]]; then
-                    open "https://cursor.com" 2>/dev/null || echo "    Visit: https://cursor.com"
-                else
-                    echo "    Visit: https://cursor.com"
-                fi
-                ;;
-            skip|"")
-                info "Skipped — you can install one later"
-                ;;
-        esac
-    fi
-fi
+# Run IDE setup as part of full flow
+ide_setup
 
 # ---------------------------------------------------------------------------
 # 8. LLM Provider Check (informational only)
