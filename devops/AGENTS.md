@@ -58,6 +58,9 @@
 | Rollback Service | `skills/rollback_service/SKILL.md` | When asked to rollback or revert a deployment |
 | Incident Triage | `skills/incident_triage/SKILL.md` | When investigating elevated errors, latency, or alerts |
 | Scale Service | `skills/scale_service/SKILL.md` | When asked to scale up/down a service |
+| Log Analysis | `skills/log_analysis/SKILL.md` | When asked to investigate logs, debug issues, or correlate events |
+| Infrastructure Management | `skills/infrastructure_management/SKILL.md` | When asked to provision, update, or validate infrastructure (IaC) |
+| Health Check | `skills/health_check/SKILL.md` | When asked for system status, health checks, or pre-deployment readiness |
 
 ## Personas Available
 

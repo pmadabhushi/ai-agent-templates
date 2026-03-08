@@ -77,6 +77,9 @@
 | Rollback | `skills/rollback_service/SKILL.md` |
 | Incident triage | `skills/incident_triage/SKILL.md` |
 | Scaling | `skills/scale_service/SKILL.md` |
+| Log analysis | `skills/log_analysis/SKILL.md` |
+| Infrastructure (IaC) | `skills/infrastructure_management/SKILL.md` |
+| Health check | `skills/health_check/SKILL.md` |
 
 ## Contact
 
