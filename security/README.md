@@ -58,29 +58,29 @@
 2. Report to: [security contact alias or secure reporting channel]
 3. Include: affected component, CVSS score (if known), reproduction steps, potential impact
 
-> **Full triage workflow:** See `skills/vuln_triage/SKILL.md`
+> **Full triage workflow:** See `skills/vuln_triage.md`
 
 ## Secrets Management
 
 - All secrets must be stored in [SecretsManager] — never in code, config files, or logs
 - Rotate secrets on this schedule: [rotation schedule, e.g., every 90 days]
 - If a secret is suspected to be exposed: contact [security contact] immediately
-- Secrets rotation runbook: `skills/secrets_rotation/SKILL.md`
+- Secrets rotation runbook: `skills/secrets_rotation.md`
 
 ## Access Management
 
 - Access follows the principle of least privilege
 - Access reviews are conducted: [frequency, e.g., quarterly]
-- Access review runbook: `skills/access_review/SKILL.md`
+- Access review runbook: `skills/access_review.md`
 
 ## Security Runbooks
 
 | Runbook | Location |
 |---|---|
-| Vulnerability triage | `skills/vuln_triage/SKILL.md` |
-| Incident response | `skills/incident_response/SKILL.md` |
-| Secrets rotation | `skills/secrets_rotation/SKILL.md` |
-| Access review | `skills/access_review/SKILL.md` |
+| Vulnerability triage | `skills/vuln_triage.md` |
+| Incident response | `skills/incident_response.md` |
+| Secrets rotation | `skills/secrets_rotation.md` |
+| Access review | `skills/access_review.md` |
 
 ## Contact
 

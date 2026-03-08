@@ -3,7 +3,7 @@
 **Skill ID:** log_analysis
 **Domain:** DevOps
 **Trigger:** User asks to investigate logs, debug an issue using logs, or correlate events across services
-**Load from:** `skills/log_analysis/SKILL.md`
+**Load from:** `skills/log_analysis.md`
 
 ## Prerequisites
 

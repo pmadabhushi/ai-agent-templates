@@ -52,9 +52,9 @@ cd [repo name]
 ├── [package-1]/
 ├── [package-2]/
 ├── skills/
-│   ├── raise_cr/
-│   ├── run_tests/
-│   └── generate_changelog/
+│   ├── raise_cr.md
+│   ├── run_tests.md
+│   └── generate_changelog.md
 ├── personas/
 │   └── dev_agent.md
 ├── AGENTS.md
@@ -70,7 +70,7 @@ cd [repo name]
 5. Add reviewers: [default reviewer group]
 6. Link to the relevant ticket and design doc
 
-> **Full CR workflow:** See `skills/raise_cr/SKILL.md`
+> **Full CR workflow:** See `skills/raise_cr.md`
 
 ## API Documentation
 

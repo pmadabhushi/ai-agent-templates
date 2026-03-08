@@ -14,9 +14,9 @@
         "patterns": "coding/design/patterns/"
       },
       "skills": [
-        "coding/skills/raise_cr/SKILL.md",
-        "coding/skills/run_tests/SKILL.md",
-        "coding/skills/generate_changelog/SKILL.md"
+        "coding/skills/raise_cr.md",
+        "coding/skills/run_tests.md",
+        "coding/skills/generate_changelog.md"
       ]
     },
     "devops": {
@@ -29,13 +29,13 @@
         "workflows": "devops/design/workflows/"
       },
       "skills": [
-        "devops/skills/deploy_service/SKILL.md",
-        "devops/skills/rollback_service/SKILL.md",
-        "devops/skills/incident_triage/SKILL.md",
-        "devops/skills/scale_service/SKILL.md",
-        "devops/skills/log_analysis/SKILL.md",
-        "devops/skills/infrastructure_management/SKILL.md",
-        "devops/skills/health_check/SKILL.md"
+        "devops/skills/deploy_service.md",
+        "devops/skills/rollback_service.md",
+        "devops/skills/incident_triage.md",
+        "devops/skills/scale_service.md",
+        "devops/skills/log_analysis.md",
+        "devops/skills/infrastructure_management.md",
+        "devops/skills/health_check.md"
       ]
     },
     "security": {
@@ -48,10 +48,10 @@
         "controls": "security/design/controls/"
       },
       "skills": [
-        "security/skills/vuln_triage/SKILL.md",
-        "security/skills/incident_response/SKILL.md",
-        "security/skills/secrets_rotation/SKILL.md",
-        "security/skills/access_review/SKILL.md"
+        "security/skills/vuln_triage.md",
+        "security/skills/incident_response.md",
+        "security/skills/secrets_rotation.md",
+        "security/skills/access_review.md"
       ]
     }
   },

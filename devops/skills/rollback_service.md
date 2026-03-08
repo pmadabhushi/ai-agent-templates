@@ -3,7 +3,7 @@
 **Skill ID:** rollback_service
 **Domain:** DevOps
 **Trigger:** User asks to rollback or revert a deployment; or error rate/latency thresholds are breached post-deployment
-**Load from:** `skills/rollback_service/SKILL.md`
+**Load from:** `skills/rollback_service.md`
 
 ## Prerequisites
 

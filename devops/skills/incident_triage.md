@@ -3,7 +3,7 @@
 **Skill ID:** incident_triage
 **Domain:** DevOps
 **Trigger:** User reports elevated errors, latency spikes, alerts firing, or service degradation
-**Load from:** `skills/incident_triage/SKILL.md`
+**Load from:** `skills/incident_triage.md`
 
 ## Prerequisites
 

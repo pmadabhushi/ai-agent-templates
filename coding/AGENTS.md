@@ -33,7 +33,7 @@
 6. Link to the relevant design doc or ticket
 7. Post CR summary to `[team channel]`
 
-> For detailed steps, load skill: `skills/raise_cr/SKILL.md`
+> For detailed steps, load skill: `skills/raise_cr.md`
 
 ## Design Patterns & Conventions
 
@@ -53,9 +53,9 @@
 
 | Skill | File | When to Load |
 |---|---|---|
-| Raise Code Review | `skills/raise_cr/SKILL.md` | When asked to raise a CR or submit a code review |
-| Run Tests | `skills/run_tests/SKILL.md` | When asked to run tests or validate a change |
-| Generate Changelog | `skills/generate_changelog/SKILL.md` | When preparing a release or summarizing changes |
+| Raise Code Review | `skills/raise_cr.md` | When asked to raise a CR or submit a code review |
+| Run Tests | `skills/run_tests.md` | When asked to run tests or validate a change |
+| Generate Changelog | `skills/generate_changelog.md` | When preparing a release or summarizing changes |
 
 ## Personas Available
 

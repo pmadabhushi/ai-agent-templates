@@ -60,10 +60,10 @@ Flags:                [any escalations, open questions, or undismissed findings]
 
 | Task | Skill to Load |
 |---|---|
-| Triaging a vulnerability or CVE | `skills/vuln_triage/SKILL.md` |
-| Responding to a security incident | `skills/incident_response/SKILL.md` |
-| Rotating or remediating exposed secrets | `skills/secrets_rotation/SKILL.md` |
-| Reviewing IAM roles or access grants | `skills/access_review/SKILL.md` |
+| Triaging a vulnerability or CVE | `skills/vuln_triage.md` |
+| Responding to a security incident | `skills/incident_response.md` |
+| Rotating or remediating exposed secrets | `skills/secrets_rotation.md` |
+| Reviewing IAM roles or access grants | `skills/access_review.md` |
 
 ## References
 

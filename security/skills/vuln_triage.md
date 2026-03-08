@@ -3,7 +3,7 @@
 **Skill ID:** vuln_triage
 **Domain:** Security
 **Trigger:** User asks to triage a vulnerability, CVE, or security finding
-**Load from:** `skills/vuln_triage/SKILL.md`
+**Load from:** `skills/vuln_triage.md`
 
 ## Prerequisites
 

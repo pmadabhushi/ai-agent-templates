@@ -3,7 +3,7 @@
 **Skill ID:** deploy_service
 **Domain:** DevOps
 **Trigger:** User asks to deploy, promote, or release a service version
-**Load from:** `skills/deploy_service/SKILL.md`
+**Load from:** `skills/deploy_service.md`
 
 ## Prerequisites
 
@@ -49,16 +49,6 @@ Proceed with prod deployment? (yes/no)
 - Run: `[deploy command] --service [ServiceName] --version [X.Y.Z] --env [environment]`
 - Monitor deployment progress in real time
 - If deployment fails mid-way: initiate rollback immediately (load `rollback_service` skill)
-
-### Step 6 — Post-Deployment Monitoring
-- Monitor error rate and P99 latency for 10 minutes post-deployment
-- Thresholds: error rate < [X]%, P99 latency < [X]ms
-- If thresholds are breached: initiate roll
-Here's the continuation of the `setup.sh` script, completing all remaining files:
-
-```bash
-
-# Continuing from deploy_service/SKILL.md Step 6...
 
 ### Step 6 — Post-Deployment Monitoring
 - Monitor error rate and P99 latency for 10 minutes post-deployment

@@ -2,21 +2,31 @@
 
 ## Adding a New Domain
 
-1. Create a new folder: `mkdir -p [domain]/personas [domain]/skills/[skill-name]`
+1. Create the domain folder structure:
+   ```
+   [domain]/
+   ├── AGENTS.md
+   ├── README.md
+   ├── personas/
+   ├── skills/
+   └── design/
+   ```
 2. Copy the structure from an existing domain as a starting point
-3. Update the root `README.md` inventory table
-4. Replace all `[placeholder]` values before committing
+3. Update `template.json` with the new domain entry
+4. Update the root `README.md` inventory table
+5. Replace all `[placeholder]` values before committing
 
 ## Adding a New Skill
 
-1. Create the skill folder: `mkdir -p [domain]/skills/[skill-name]`
-2. Create `SKILL.md` using the standard format:
+1. Create `[domain]/skills/[skill-name].md`
+2. Use the standard format:
    - Skill ID, Domain, Trigger, Load from path
    - Prerequisites checklist
    - Numbered steps with sub-steps
    - Output format (code block)
    - Escalation rules
 3. Add the skill to the domain's `AGENTS.md` skills table
+4. Add the skill path to `template.json`
 
 ## Adding a New Persona
 
@@ -25,10 +35,19 @@
    Approach, Safety Rules, Output Format, Skills to Load table, References
 3. Add the persona to the domain's `AGENTS.md` personas table
 
+## Adding a Design Template
+
+1. Create `[domain]/design/[category]/[TEMPLATE_NAME].md`
+2. Design categories by domain:
+   - coding: `architecture/`, `apis/`, `patterns/`
+   - devops: `services/`, `features/`, `workflows/`
+   - security: `threat_models/`, `policies/`, `controls/`
+3. Use `[placeholder]` format for all team-specific values
+
 ## Placeholder Convention
 
 All values requiring team-specific customization use `[placeholder]` format.
-Run `grep -r "\[" .` to find all unfilled placeholders in the repository.
+Run `grep -r "\[" --include="*.md" .` to find all unfilled placeholders.
 
 ## Commit Convention
 

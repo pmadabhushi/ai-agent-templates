@@ -33,7 +33,7 @@
 3. Monitor error rate for 10 minutes post-rollback
 4. Post rollback summary to `[ops channel]`
 
-> For detailed steps, load skill: `skills/rollback_service/SKILL.md`
+> For detailed steps, load skill: `skills/rollback_service.md`
 
 ## Monitoring & Alerting
 
@@ -54,13 +54,13 @@
 
 | Skill | File | When to Load |
 |---|---|---|
-| Deploy Service | `skills/deploy_service/SKILL.md` | When asked to deploy or promote a service |
-| Rollback Service | `skills/rollback_service/SKILL.md` | When asked to rollback or revert a deployment |
-| Incident Triage | `skills/incident_triage/SKILL.md` | When investigating elevated errors, latency, or alerts |
-| Scale Service | `skills/scale_service/SKILL.md` | When asked to scale up/down a service |
-| Log Analysis | `skills/log_analysis/SKILL.md` | When asked to investigate logs, debug issues, or correlate events |
-| Infrastructure Management | `skills/infrastructure_management/SKILL.md` | When asked to provision, update, or validate infrastructure (IaC) |
-| Health Check | `skills/health_check/SKILL.md` | When asked for system status, health checks, or pre-deployment readiness |
+| Deploy Service | `skills/deploy_service.md` | When asked to deploy or promote a service |
+| Rollback Service | `skills/rollback_service.md` | When asked to rollback or revert a deployment |
+| Incident Triage | `skills/incident_triage.md` | When investigating elevated errors, latency, or alerts |
+| Scale Service | `skills/scale_service.md` | When asked to scale up/down a service |
+| Log Analysis | `skills/log_analysis.md` | When asked to investigate logs, debug issues, or correlate events |
+| Infrastructure Management | `skills/infrastructure_management.md` | When asked to provision, update, or validate infrastructure (IaC) |
+| Health Check | `skills/health_check.md` | When asked for system status, health checks, or pre-deployment readiness |
 
 ## Personas Available
 

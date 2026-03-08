@@ -3,7 +3,7 @@
 **Skill ID:** secrets_rotation
 **Domain:** Security
 **Trigger:** User asks to rotate secrets; a secret is suspected or confirmed to be exposed; a credential is expiring; or post-incident remediation requires credential rotation
-**Load from:** `skills/secrets_rotation/SKILL.md`
+**Load from:** `skills/secrets_rotation.md`
 
 ## Prerequisites
 
@@ -66,14 +66,6 @@ Incident Ticket:      [link or "N/A — routine rotation"]
 Stop and escalate to security contact immediately if:
 - The secret was confirmed to be exposed externally
 - Any consuming service fails to validate with the new secret and the issue cannot be resolved
-- The old secret cannot be revoked due to a system
-Here's the continuation of `setup.sh`, completing all remaining files and finalizing the script:
-
-```bash
-
-# Continuing secrets_rotation/SKILL.md Escalation section...
-
-cat >> security/skills/secrets_rotation/SKILL.md << 'HEREDOC'
 - The old secret cannot be revoked due to a system dependency
 - The secret is used by a Critical-classified asset and rotation causes unexpected downtime
 - You are unable to identify all consumers of the secret

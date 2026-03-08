@@ -3,7 +3,7 @@
 **Skill ID:** infrastructure_management
 **Domain:** DevOps
 **Trigger:** User asks to provision, update, validate, or destroy infrastructure resources; IaC drift detected; infrastructure change review requested
-**Load from:** `skills/infrastructure_management/SKILL.md`
+**Load from:** `skills/infrastructure_management.md`
 
 ## Prerequisites
 

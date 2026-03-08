@@ -28,7 +28,7 @@
 - Rotate secrets using: `[rotation command or process]`
 - If a secret is suspected to be exposed: escalate immediately to `[security contact]`
 
-> For detailed steps, load skill: `skills/secrets_rotation/SKILL.md`
+> For detailed steps, load skill: `skills/secrets_rotation.md`
 
 ## Vulnerability Severity Triage Matrix
 
@@ -58,10 +58,10 @@
 
 | Skill | File | When to Load |
 |---|---|---|
-| Vulnerability Triage | `skills/vuln_triage/SKILL.md` | When processing a security finding or CVE |
-| Incident Response | `skills/incident_response/SKILL.md` | When a security incident is declared |
-| Secrets Rotation | `skills/secrets_rotation/SKILL.md` | When rotating or remediating exposed secrets |
-| Access Review | `skills/access_review/SKILL.md` | When reviewing IAM roles, permissions, or access grants |
+| Vulnerability Triage | `skills/vuln_triage.md` | When processing a security finding or CVE |
+| Incident Response | `skills/incident_response.md` | When a security incident is declared |
+| Secrets Rotation | `skills/secrets_rotation.md` | When rotating or remediating exposed secrets |
+| Access Review | `skills/access_review.md` | When reviewing IAM roles, permissions, or access grants |
 
 ## Personas Available
 

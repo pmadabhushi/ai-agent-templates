@@ -46,8 +46,8 @@
 [deploy command] --service [ServiceName] --version [X.Y.Z] --env prod
 ```
 
-> **Full deployment workflow:** See `skills/deploy_service/SKILL.md`
-> **Rollback procedure:** See `skills/rollback_service/SKILL.md`
+> **Full deployment workflow:** See `skills/deploy_service.md`
+> **Rollback procedure:** See `skills/rollback_service.md`
 
 ## Deployment Rules
 
@@ -73,13 +73,13 @@
 
 | Runbook | Location |
 |---|---|
-| Deployment | `skills/deploy_service/SKILL.md` |
-| Rollback | `skills/rollback_service/SKILL.md` |
-| Incident triage | `skills/incident_triage/SKILL.md` |
-| Scaling | `skills/scale_service/SKILL.md` |
-| Log analysis | `skills/log_analysis/SKILL.md` |
-| Infrastructure (IaC) | `skills/infrastructure_management/SKILL.md` |
-| Health check | `skills/health_check/SKILL.md` |
+| Deployment | `skills/deploy_service.md` |
+| Rollback | `skills/rollback_service.md` |
+| Incident triage | `skills/incident_triage.md` |
+| Scaling | `skills/scale_service.md` |
+| Log analysis | `skills/log_analysis.md` |
+| Infrastructure (IaC) | `skills/infrastructure_management.md` |
+| Health check | `skills/health_check.md` |
 
 ## Design Documentation
 

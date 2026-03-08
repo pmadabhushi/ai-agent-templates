@@ -50,9 +50,9 @@ Flags:            [any shared interface changes, open questions, or escalations]
 
 | Task | Skill to Load |
 |---|---|
-| Raising a code review | `skills/raise_cr/SKILL.md` |
-| Running tests | `skills/run_tests/SKILL.md` |
-| Generating a changelog | `skills/generate_changelog/SKILL.md` |
+| Raising a code review | `skills/raise_cr.md` |
+| Running tests | `skills/run_tests.md` |
+| Generating a changelog | `skills/generate_changelog.md` |
 
 ## References
 

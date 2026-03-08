@@ -61,11 +61,11 @@ def load_all_skills(domain: str) -> dict[str, str]:
     domains = get_domains()
     result = {}
     for skill_path in domains[domain]["skills"]:
-        parts = skill_path.split("/")
-        skill_name = parts[-2]
+        # Extract skill name from path like "devops/skills/deploy_service.md"
+        name = Path(skill_path).stem  # e.g., "deploy_service"
         content = read_md(skill_path)
         if not content.startswith("[File not found"):
-            result[skill_name] = content
+            result[name] = content
     return result
 
 
@@ -74,8 +74,7 @@ def list_skills(domain: str) -> list[str]:
     domains = get_domains()
     skills = []
     for skill_path in domains[domain]["skills"]:
-        parts = skill_path.split("/")
-        skill_name = parts[-2]
+        skill_name = Path(skill_path).stem  # e.g., "deploy_service"
         skills.append(skill_name)
     return skills
 

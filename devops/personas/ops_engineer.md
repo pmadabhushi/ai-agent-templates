@@ -129,13 +129,13 @@ Flags:          [any escalations or open questions]
 
 | Task | Skill to Load |
 |---|---|
-| Deploying a service | `skills/deploy_service/SKILL.md` |
-| Rolling back a service | `skills/rollback_service/SKILL.md` |
-| Investigating an incident | `skills/incident_triage/SKILL.md` |
-| Scaling a service | `skills/scale_service/SKILL.md` |
-| Analyzing logs | `skills/log_analysis/SKILL.md` |
-| Managing infrastructure (IaC) | `skills/infrastructure_management/SKILL.md` |
-| Running a health check | `skills/health_check/SKILL.md` |
+| Deploying a service | `skills/deploy_service.md` |
+| Rolling back a service | `skills/rollback_service.md` |
+| Investigating an incident | `skills/incident_triage.md` |
+| Scaling a service | `skills/scale_service.md` |
+| Analyzing logs | `skills/log_analysis.md` |
+| Managing infrastructure (IaC) | `skills/infrastructure_management.md` |
+| Running a health check | `skills/health_check.md` |
 
 ## Common Abbreviations
 

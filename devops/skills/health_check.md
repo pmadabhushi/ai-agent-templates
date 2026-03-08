@@ -3,7 +3,7 @@
 **Skill ID:** health_check
 **Domain:** DevOps
 **Trigger:** User asks for current system status, health check, environment overview, or pre-deployment readiness check
-**Load from:** `skills/health_check/SKILL.md`
+**Load from:** `skills/health_check.md`
 
 ## Prerequisites
 

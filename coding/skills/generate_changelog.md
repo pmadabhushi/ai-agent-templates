@@ -3,7 +3,7 @@
 **Skill ID:** generate_changelog
 **Domain:** Coding
 **Trigger:** User asks to generate a changelog, prepare release notes, or summarize changes between two versions
-**Load from:** `skills/generate_changelog/SKILL.md`
+**Load from:** `skills/generate_changelog.md`
 
 ## Prerequisites
 

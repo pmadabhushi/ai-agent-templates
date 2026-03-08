@@ -3,7 +3,7 @@
 **Skill ID:** raise_cr
 **Domain:** Coding
 **Trigger:** User asks to raise a CR, submit a code review, or create a pull request
-**Load from:** `skills/raise_cr/SKILL.md`
+**Load from:** `skills/raise_cr.md`
 
 ## Prerequisites
 

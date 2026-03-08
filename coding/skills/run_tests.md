@@ -3,7 +3,7 @@
 **Skill ID:** run_tests
 **Domain:** Coding
 **Trigger:** User asks to run tests, validate a change, check test coverage, or verify a build before raising a CR
-**Load from:** `skills/run_tests/SKILL.md`
+**Load from:** `skills/run_tests.md`
 
 ## Prerequisites
 

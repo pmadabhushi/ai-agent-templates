@@ -3,7 +3,7 @@
 **Skill ID:** access_review
 **Domain:** Security
 **Trigger:** User asks to review IAM roles, permissions, or access grants; periodic access review is due; post-incident access audit required; or a team member has changed roles or left the organization
-**Load from:** `skills/access_review/SKILL.md`
+**Load from:** `skills/access_review.md`
 
 ## Prerequisites
 

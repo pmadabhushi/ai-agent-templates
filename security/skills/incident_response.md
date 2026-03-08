@@ -3,7 +3,7 @@
 **Skill ID:** incident_response
 **Domain:** Security
 **Trigger:** A security incident is declared, a breach is suspected, anomalous access is detected, or a critical vulnerability is being actively exploited
-**Load from:** `skills/incident_response/SKILL.md`
+**Load from:** `skills/incident_response.md`
 
 ## Prerequisites
 

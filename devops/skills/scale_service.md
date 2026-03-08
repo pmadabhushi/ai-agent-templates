@@ -3,7 +3,7 @@
 **Skill ID:** scale_service
 **Domain:** DevOps
 **Trigger:** User asks to scale up or down a service; traffic spike detected; capacity alarm firing; or post-incident recovery requires capacity adjustment
-**Load from:** `skills/scale_service/SKILL.md`
+**Load from:** `skills/scale_service.md`
 
 ## Prerequisites
 
