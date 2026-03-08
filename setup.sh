@@ -46,32 +46,48 @@ ERRORS=0
 WARNINGS=0
 
 # ---------------------------------------------------------------------------
-# Detect script location (repo root)
+# Detect script location and ensure repo is available
 # ---------------------------------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Verify we're in the agent-context-kit repo
+# If setup.sh is not inside the repo, clone it first
 if [[ ! -f "$SCRIPT_DIR/agent/requirements.txt" ]]; then
-    fail "Can't find agent/requirements.txt relative to setup.sh"
+    header "0. Cloning Repository"
+
+    REPO_URL="https://github.com/pmadabhushi/agent-context-kit.git"
+    CLONE_DIR="$SCRIPT_DIR/agent-context-kit"
+
+    if [[ -d "$CLONE_DIR" && -f "$CLONE_DIR/agent/requirements.txt" ]]; then
+        pass "Repo already cloned: $CLONE_DIR"
+    else
+        info "setup.sh is not inside the repo — cloning it now..."
+
+        if ! command -v git &>/dev/null; then
+            fail "Git is not installed — can't clone the repo"
+            echo ""
+            echo "  Install Git first:"
+            echo "    macOS:  xcode-select --install"
+            echo "    Linux:  sudo apt install git  (or dnf/pacman)"
+            echo ""
+            echo "  Then re-run: bash setup.sh"
+            exit 1
+        fi
+
+        git clone "$REPO_URL" "$CLONE_DIR"
+        if [[ $? -ne 0 ]]; then
+            fail "Failed to clone $REPO_URL"
+            exit 1
+        fi
+        pass "Repo cloned to: $CLONE_DIR"
+    fi
+
+    # Copy this script into the repo so future runs work from there
+    cp "${BASH_SOURCE[0]}" "$CLONE_DIR/setup.sh" 2>/dev/null || true
+
+    # Re-exec from inside the repo
+    info "Continuing setup from inside the repo..."
     echo ""
-    echo "  setup.sh must be in the root of the agent-context-kit repo."
-    echo "  Detected location: $SCRIPT_DIR"
-    echo ""
-    echo "  Expected structure:"
-    echo "    $SCRIPT_DIR/"
-    echo "    ├── setup.sh          ← you are here"
-    echo "    ├── agent/"
-    echo "    │   ├── requirements.txt"
-    echo "    │   ├── main.py"
-    echo "    │   └── ..."
-    echo "    ├── templates/"
-    echo "    └── docs/"
-    echo ""
-    echo "  If you haven't cloned the repo yet:"
-    echo "    git clone https://github.com/pmadabhushi/agent-context-kit.git"
-    echo "    cd agent-context-kit"
-    echo "    ./setup.sh"
-    exit 1
+    exec bash "$CLONE_DIR/setup.sh" "$@"
 fi
 
 # ---------------------------------------------------------------------------
