@@ -56,12 +56,25 @@
 
 ## Skills Available
 
-| Skill | File | When to Load |
+| Skill | Source | When to Load |
 |---|---|---|
 | Vulnerability Triage | `skills/vuln_triage.md` | When processing a security finding or CVE |
 | Incident Response | `skills/incident_response.md` | When a security incident is declared |
 | Secrets Rotation | `skills/secrets_rotation.md` | When rotating or remediating exposed secrets |
 | Access Review | `skills/access_review.md` | When reviewing IAM roles, permissions, or access grants |
+
+> **Importing skills from the registry:** Skills can also be pulled from [skills.sh](https://skills.sh) instead of (or alongside) local files. Add registry skills to your `template.json` using:
+> - Shorthand: `"skills.sh:skill_name"` — resolves to `https://skills.sh/skill_name`
+> - Full URL: `"https://skills.sh/skill_name"`
+>
+> Example `template.json` entry:
+> ```json
+> "skills": [
+>   "skills/vuln_triage.md",
+>   "skills.sh:soc2_evidence_collection",
+>   "https://skills.sh/owasp_top10_review"
+> ]
+> ```
 
 ## Persona
 

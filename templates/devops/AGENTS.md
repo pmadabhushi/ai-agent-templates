@@ -52,7 +52,7 @@
 
 ## Skills Available
 
-| Skill | File | When to Load |
+| Skill | Source | When to Load |
 |---|---|---|
 | Deploy Service | `skills/deploy_service.md` | When asked to deploy or promote a service |
 | Rollback Service | `skills/rollback_service.md` | When asked to rollback or revert a deployment |
@@ -61,6 +61,19 @@
 | Log Analysis | `skills/log_analysis.md` | When asked to investigate logs, debug issues, or correlate events |
 | Infrastructure Management | `skills/infrastructure_management.md` | When asked to provision, update, or validate infrastructure (IaC) |
 | Health Check | `skills/health_check.md` | When asked for system status, health checks, or pre-deployment readiness |
+
+> **Importing skills from the registry:** Skills can also be pulled from [skills.sh](https://skills.sh) instead of (or alongside) local files. Add registry skills to your `template.json` using:
+> - Shorthand: `"skills.sh:skill_name"` — resolves to `https://skills.sh/skill_name`
+> - Full URL: `"https://skills.sh/skill_name"`
+>
+> Example `template.json` entry:
+> ```json
+> "skills": [
+>   "skills/deploy_service.md",
+>   "skills.sh:kubernetes_rollout",
+>   "https://skills.sh/argo_cd_deploy"
+> ]
+> ```
 
 ## Persona
 

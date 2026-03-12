@@ -66,8 +66,30 @@ agent-context-kit/
 |------|---------|
 | `AGENTS.md` | Team config read at session start: tools, conventions, safety rules |
 | `persona.md` | Mindset, methodology, safety guardrails, output format |
-| `skills/*.md` | Step-by-step runbooks loaded on demand for specific tasks |
+| `skills/*.md` | Step-by-step runbooks — local files or imported from [skills.sh](https://skills.sh) |
 | `design/**/*.md` | Architecture, API specs, patterns, threat models, policies |
+
+## Importing Skills from the Registry
+
+Skills can be local files or pulled directly from [skills.sh](https://skills.sh), a community registry of reusable agent runbooks. Mix and match in `template.json`:
+
+```json
+"skills": [
+  "templates/coding/skills/raise_cr.md",
+  "skills.sh:semantic_release",
+  "https://skills.sh/conventional_commits"
+]
+```
+
+Three formats are supported:
+
+| Format | Example | Resolves to |
+|--------|---------|-------------|
+| Local file | `"templates/coding/skills/raise_cr.md"` | Read from disk |
+| Registry shorthand | `"skills.sh:semantic_release"` | `https://skills.sh/semantic_release` |
+| Full URL | `"https://skills.sh/conventional_commits"` | Fetched over HTTP |
+
+The agent fetches remote skills at startup and falls back gracefully if a skill is unavailable.
 
 ## Try the Agent (Expert)
 

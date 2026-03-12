@@ -51,11 +51,24 @@
 
 ## Skills Available
 
-| Skill | File | When to Load |
+| Skill | Source | When to Load |
 |---|---|---|
 | Raise Code Review | `skills/raise_cr.md` | When asked to raise a CR or submit a code review |
 | Run Tests | `skills/run_tests.md` | When asked to run tests or validate a change |
 | Generate Changelog | `skills/generate_changelog.md` | When preparing a release or summarizing changes |
+
+> **Importing skills from the registry:** Skills can also be pulled from [skills.sh](https://skills.sh) instead of (or alongside) local files. Add registry skills to your `template.json` using:
+> - Shorthand: `"skills.sh:skill_name"` — resolves to `https://skills.sh/skill_name`
+> - Full URL: `"https://skills.sh/skill_name"`
+>
+> Example `template.json` entry:
+> ```json
+> "skills": [
+>   "skills/raise_cr.md",
+>   "skills.sh:semantic_release",
+>   "https://skills.sh/conventional_commits"
+> ]
+> ```
 
 ## Persona
 

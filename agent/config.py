@@ -1,16 +1,22 @@
 """
 Configuration for the multi-persona agent.
 Reads template.json and resolves all persona/skill/design file paths.
+Supports local skill files and remote skills fetched from a registry (e.g. skills.sh).
 """
 
 import json
 import os
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 # Root of the templates repo (one level up from agent/)
 TEMPLATES_ROOT = Path(__file__).resolve().parent.parent
 
 TEMPLATE_MANIFEST = TEMPLATES_ROOT / "template.json"
+
+# Default skills registry base URL
+SKILLS_REGISTRY = "https://skills.sh"
 
 
 def load_manifest() -> dict:
@@ -32,6 +38,41 @@ def read_md(relative_path: str) -> str:
     return full_path.read_text()
 
 
+def _is_remote_skill(skill_path: str) -> bool:
+    """Return True if skill_path is a remote URL or a skills.sh shorthand."""
+    return skill_path.startswith(("http://", "https://", "skills.sh:"))
+
+
+def _resolve_skill_url(skill_path: str) -> str:
+    """Resolve a skill path to a full URL.
+
+    Supports:
+    - Full URLs:  https://skills.sh/raise_cr
+    - Shorthand:  skills.sh:raise_cr  →  https://skills.sh/raise_cr
+    """
+    if skill_path.startswith("skills.sh:"):
+        skill_name = skill_path[len("skills.sh:"):]
+        return f"{SKILLS_REGISTRY}/{skill_name}"
+    return skill_path
+
+
+def fetch_remote_skill(url: str) -> str:
+    """Fetch a skill's markdown content from a remote URL."""
+    try:
+        req = urllib.request.Request(url, headers={"Accept": "text/markdown, text/plain, */*"})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            return response.read().decode("utf-8")
+    except urllib.error.URLError as exc:
+        return f"[Remote skill unavailable: {url} — {exc}]"
+
+
+def read_skill_source(skill_path: str) -> str:
+    """Read a skill from a local path or a remote URL (including skills.sh shorthand)."""
+    if _is_remote_skill(skill_path):
+        return fetch_remote_skill(_resolve_skill_url(skill_path))
+    return read_md(skill_path)
+
+
 def load_persona(domain: str) -> str:
     """Load the persona markdown for a domain."""
     domains = get_domains()
@@ -47,12 +88,26 @@ def load_agents_md(domain: str) -> str:
     return read_md(domains[domain]["agents"])
 
 
+def _skill_name_from_path(skill_path: str) -> str:
+    """Derive a short skill name from a local path or remote URL/shorthand.
+
+    Examples:
+      "templates/coding/skills/raise_cr.md"  →  "raise_cr"
+      "skills.sh:raise_cr"                   →  "raise_cr"
+      "https://skills.sh/deploy_service"     →  "deploy_service"
+    """
+    if skill_path.startswith("skills.sh:"):
+        return skill_path[len("skills.sh:"):]
+    # Works for both local paths and URLs: take the last path segment, strip ext
+    return Path(skill_path.rstrip("/")).stem
+
+
 def load_skill(domain: str, skill_name: str) -> str | None:
     """Load a specific skill by name for a domain. Returns None if not found."""
     domains = get_domains()
     for skill_path in domains[domain]["skills"]:
         if skill_name in skill_path:
-            return read_md(skill_path)
+            return read_skill_source(skill_path)
     return None
 
 
@@ -61,10 +116,9 @@ def load_all_skills(domain: str) -> dict[str, str]:
     domains = get_domains()
     result = {}
     for skill_path in domains[domain]["skills"]:
-        # Extract skill name from path like "devops/skills/deploy_service.md"
-        name = Path(skill_path).stem  # e.g., "deploy_service"
-        content = read_md(skill_path)
-        if not content.startswith("[File not found"):
+        name = _skill_name_from_path(skill_path)
+        content = read_skill_source(skill_path)
+        if not content.startswith("[File not found") and not content.startswith("[Remote skill unavailable"):
             result[name] = content
     return result
 
@@ -72,11 +126,7 @@ def load_all_skills(domain: str) -> dict[str, str]:
 def list_skills(domain: str) -> list[str]:
     """List available skill names for a domain."""
     domains = get_domains()
-    skills = []
-    for skill_path in domains[domain]["skills"]:
-        skill_name = Path(skill_path).stem  # e.g., "deploy_service"
-        skills.append(skill_name)
-    return skills
+    return [_skill_name_from_path(p) for p in domains[domain]["skills"]]
 
 
 def load_design_docs(domain: str) -> dict[str, list[dict]]:

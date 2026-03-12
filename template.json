@@ -55,8 +55,10 @@
       ]
     }
   },
+  "skills_registry": "https://skills.sh",
   "usage": {
     "instructions": "Copy the relevant domain folder from templates/ into your service repo. Replace all [placeholder] values with your team's actual tools, commands, and conventions. Point your AI agent at AGENTS.md as its startup config.",
+    "skills_registry_instructions": "Skills can be local files (e.g. 'templates/coding/skills/raise_cr.md') or imported from the skills registry using the shorthand 'skills.sh:skill_name' (resolves to https://skills.sh/skill_name) or a full URL 'https://skills.sh/skill_name'.",
     "reference": "https://agents.md/"
   },
   "agent": {
